@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+	<meta charset="utf-8">
+	<title>basicLightbox Demo</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+	<link rel="stylesheet" href="../dist/basicLightbox.min.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+
+		html {
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			text-align: center;
+			min-height: 100%;
+			font-size: 14px;
+			color: white;
+		}
+
+		a.button {
+			display: inline-block;
+			margin: 50px 0;
+			padding: 6px 10px;
+			background: #2875ed;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 3px;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+	</style>
+
+	<img src="http://placehold.it/1400x900" width="1400" height="900" data-lightBox="0">
+	<a href="#" class="button" data-lightBox-show="0">img</a>
+
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen data-lightBox="1"></iframe>
+	<a href="#" class="button" data-lightBox-show="1">iframe</a>
+
+	<div data-lightBox="2">
+		<h1>Hello</h1>
+		<p>I'm a div inside the lightbox.</p>
+	</div>
+	<a href="#" class="button" data-lightBox-show="2">div</a>
+
+	<script src="../dist/basicLightbox.min.js"></script>
+
+	<script>
+		basicLightbox.init()
+	</script>
+
+</html>

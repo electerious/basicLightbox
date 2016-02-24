@@ -1,0 +1,69 @@
+.lightBox {
+
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: $basicLightbox__background;
+	opacity: 0;
+	transition: opacity $basicLightbox__duration $basicLightbox__timing;
+	z-index: $basicLightbox__zIndex;
+	will-change: opacity;
+
+	// States --------------------------------------------------------- //
+	&--visible {
+		opacity: 1;
+	}
+
+	// Close --------------------------------------------------------- //
+	&__close {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	// Placeholder -------------------------------------------------------------- //
+	&__placeholder {
+		text-align: center;
+		transform: scale(.9);
+		transition: transform $basicLightbox__duration $basicLightbox__timing;
+		z-index: 1;
+		will-change: transform;
+
+		img {
+			margin: 0;
+			max-height: 100%;
+			max-width: 100%;
+			width: auto;
+			height: auto;
+		}
+
+		iframe {
+			margin: 0;
+			max-width: 100%;
+		}
+
+		[data-lightBox] {
+			// Always show element no matter what
+			display: block !important;
+		}
+	}
+
+	&--visible &__placeholder {
+		transform: scale(1);
+	}
+
+}
+
+[data-lightBox] {
+
+	// Always hide element no matter what
+	display: none !important;
+
+}

@@ -1,0 +1,25 @@
+{
+  "name": "basiclightbox",
+  "moduleName": "basicLightbox",
+  "version": "0.0.1",
+  "authors": [
+    "Tobias Reich <tobias@electerious.com>"
+  ],
+  "description": "",
+  "main": "dist/basicLightbox.min.js",
+  "keywords": [],
+  "scripts": {
+    "start": "gulp watch",
+    "compile": "gulp"
+  },
+  "license": "MIT",
+  "homepage": "http://github.com/electerious/basicLightbox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electerious/basicLightbox.git"
+  },
+  "devDependencies": {
+    "@electerious/basictasks": "1.1.4",
+    "gulp": "^3.9.1"
+  }
+}
