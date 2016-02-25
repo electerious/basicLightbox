@@ -36,7 +36,7 @@
 		z-index: 1;
 		will-change: transform;
 
-		img {
+		> img {
 			margin: 0;
 			max-height: 100%;
 			max-width: 100%;
@@ -44,7 +44,7 @@
 			height: auto;
 		}
 
-		iframe {
+		> iframe {
 			margin: 0;
 			max-width: 100%;
 		}
