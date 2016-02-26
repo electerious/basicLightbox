@@ -19,7 +19,7 @@
     "url": "https://github.com/electerious/basicLightbox.git"
   },
   "devDependencies": {
-    "@electerious/basictasks": "1.1.5",
+    "@electerious/basictasks": "1.2.0",
     "gulp": "^3.9.1"
   }
 }
