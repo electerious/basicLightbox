@@ -7,6 +7,14 @@ The lightest lightbox ever made.
 - [Demos](#demos)
 - [Features](#features)
 - [Requirements](#requirements)
+- [Setup](#setup)
+- [How to use](#how-to-use)
+- [Functions](#functions)
+	- [Init](#init)
+	- [Show](#show)
+	- [Close](#close)
+	- [Exists](#exists)
+	- [Visible](#visible)
 
 ## Demos
 
@@ -55,4 +63,135 @@ Skip the JS-file if you want to use basicLightbox as module together with [Brows
 
 ```js
 let basicLightbox = require('basiclightbox')
+```
+
+## How to use
+
+There're two ways of using basicLightbox:
+- Link elements using the `data-basicLightbox-show` and `data-basicLightbox` attribute.
+- Manually show and hide the lightbox using the available [functions](#functions).
+
+This chapter will explain how to link elements as using the API explains itself.
+
+First we need to create the button which should show a lightbox when clicked. This could be an element of any kind, but it must have the `data-basicLightbox-show` attribute with a unique ID.
+
+```html
+<a href="#" data-basicLightbox-show="0">photo</a>
+```
+
+Now we create the element which should be shown inside the lightbox. It must have a `data-basicLightbox` attribute with the same ID as the button. basicLightbox will automatically place it in the middle of the lightbox when the trigger gets clicked. This works with any kind of HTML: Images (`<img...>`), iframes (`<iframe...>`), DIVs (`<div...>...</div>`), etc. All `data-basicLightbox` elements are hidden as they should only show up inside the lightbox.
+
+```html
+<img src="http://placehold.it/1400x900" width="1400" height="900" data-basicLightbox="0">
+```
+
+Lastly we tell basicLightbox that it should bind all elements together:
+
+```js
+basicLightbox.init()
+```
+
+That's it! Clicking the button will show a lightbox filled with an image. Clicking the background of the lightbox will close it.
+
+## Functions
+
+basicLightbox comes with a handful of handy functions. Below are all of them along with a short description.
+
+### Init
+
+Binds click events to all elements with the `data-basicLightbox-show` attribute or to a custom set of elements. You can also skip this step and manually trigger a lightbox using the [show](#show)-function.
+
+Syntax:
+```js
+basicLightbox.init(elements, options)
+```
+
+Examples:
+```js
+basicLightbox.init()
+```
+```js
+basicLightbox.init('.button')
+```
+```js
+basicLightbox.init(document.querySelectorAll('.button'))
+```
+```js
+basicLightbox.init(null, {
+	closable: false
+})
+```
+
+Parameters:
+- `elements` `{String | NodeList | null}` Elements which should show a lightbox when clicked. All of them must have the `data-basicLightbox-show` attribute with a corresponding `data-basicLightbox` element.
+- `options` `{Object | null}` An object of [options](#options).
+
+### Show
+
+Shows a lightbox with any kind of HTML.
+
+Syntax:
+```js
+basicLightbox.show(html, options)
+```
+
+Examples:
+```js
+basicLightbox.show(`
+	<img src="http://placehold.it/1400x900" width="1400" height="900">
+`)
+```
+```js
+basicLightbox.show(`
+	<div>
+		<h1>DIV</h1>
+		<p>I'm a div inside a lightbox.</p>
+	</div>
+`, {
+	afterShow: () => console.log('afterShow')
+})
+```
+
+Parameters:
+- `html` `{String}` Any kind of HTML. Will be placed centered inside the lightbox.
+- `options` `{Object | null}` An object of [options](#options).
+
+### Close
+
+Closes the visible lightbox.
+
+Syntax:
+```js
+basicLightbox.close(options)
+```
+
+Examples:
+```js
+basicLightbox.close()
+```
+```js
+basicLightbox.close({
+	afterClose: () => console.log('afterClose')
+})
+```
+
+Parameters:
+- `options` `{Object | null}` An object of [options](#options).
+
+### Exists
+
+Returns `true` when a lightbox exists and `false` otherwise. Attention: basicLightbox will make the elements visible right after adding them to the DOM. It's possible that a lightbox exists, but isn't [visible](#visible).
+
+Syntax:
+```js
+basicLightbox.exists()
+```
+
+### Visible
+
+Returns `true` when a lightbox is visible and `false` otherwise. Attention: It's possible that a lightbox isn't visible, but [exists](#exists).
+
+Syntax:
+```js
+basicLightbox.visible()
 ```
