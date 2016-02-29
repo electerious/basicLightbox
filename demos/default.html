@@ -65,7 +65,7 @@
 
 	<div data-basicLightbox="5">
 		<h1>Invalid</h1>
-		<p>No callback should fire, because non of them is a function.</p>
+		<p>No callback should fire, because non of them is a function.<br>No HTML should be appended, because non of them is a function or string.</p>
 	</div>
 	<a href="#" class="button invalid" data-basicLightbox-show="5">invalid</a>
 
@@ -81,6 +81,12 @@
 	</div>
 	<a href="#" class="button notclosable" data-basicLightbox-show="7">not closable</a>
 
+	<div data-basicLightbox="8">
+		<h1>Custom HTML</h1>
+		<p>You can add custom HTML inside and outside, before and after the placeholder.</p>
+	</div>
+	<a href="#" class="button custom" data-basicLightbox-show="8">custom</a>
+
 	<script src="../dist/basicLightbox.min.js"></script>
 
 	<script>
@@ -95,16 +101,26 @@
 			beforeClose: function() { console.log('beforeClose'); return false }
 		})
 		basicLightbox.init('.button.invalid', {
-			beforeShow  : null,
-			afterShow   : null,
-			beforeClose : null,
-			afterClose  : null
+			beforeShow        : null,
+			afterShow         : null,
+			beforeClose       : null,
+			afterClose        : null,
+			beforePlaceholder : null,
+			afterPlaceholder  : null,
+			beforeHTML        : null,
+			afterHTML         : null
 		})
 		basicLightbox.init('.button.closable', {
 			closable: true
 		})
 		basicLightbox.init('.button.notclosable', {
 			closable: false
+		})
+		basicLightbox.init('.button.custom', {
+			beforePlaceholder : function() { return 'beforePlaceholder' },
+			afterPlaceholder  : 'afterPlaceholder',
+			beforeHTML        : function() { return 'beforeHTML' },
+			afterHTML         : 'afterHTML'
 		})
 
 	</script>

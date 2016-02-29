@@ -40,16 +40,34 @@ const validate = function(opts = {}) {
 	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
 	if (typeof opts.afterClose !== 'function')  opts.afterClose = () => {}
 
+	if (typeof opts.beforeHTML === 'function') opts.beforeHTML = opts.beforeHTML()
+	if (typeof opts.afterHTML === 'function')  opts.afterHTML = opts.afterHTML()
+
+	if (typeof opts.beforeHTML !== 'string') opts.beforeHTML = ''
+	if (typeof opts.afterHTML !== 'string')  opts.afterHTML = ''
+
+	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
+	if (typeof opts.afterPlaceholder === 'function')  opts.afterPlaceholder = opts.afterPlaceholder()
+
+	if (typeof opts.beforePlaceholder !== 'string') opts.beforePlaceholder = ''
+	if (typeof opts.afterPlaceholder !== 'string')  opts.afterPlaceholder = ''
+
 	return opts
 
 }
 
-const render = function(html = '') {
+const render = function(html = '', opts) {
 
 	return (`
 		<div class="basicLightbox">
 			<div class="basicLightbox__close"></div>
-			<div class="basicLightbox__placeholder">${ html }</div>
+			${ opts.beforePlaceholder }
+			<div class="basicLightbox__placeholder">
+				${ opts.beforeHTML }
+				${ html }
+				${ opts.afterHTML }
+			</div>
+			${ opts.afterPlaceholder }
 		</div>
 	`)
 
@@ -81,7 +99,7 @@ export const show = function(html, opts) {
 	if (opts.beforeShow()===false) return false
 
 	// Append lightbox to DOM
-	document.body.insertAdjacentHTML('beforeend', render(html))
+	document.body.insertAdjacentHTML('beforeend', render(html, opts))
 
 	// Get the newly created lightbox element
 	let elem = document.querySelector('.basicLightbox')
