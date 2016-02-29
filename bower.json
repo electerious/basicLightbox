@@ -3,9 +3,19 @@
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
-  "description": "",
+  "description": "The lightest lightbox ever made.",
   "main": "dist/basicLightbox.min.js",
-  "keywords": [],
+  "keywords": [
+    "lightbox",
+    "popup",
+    "modal",
+    "window",
+    "dialog",
+    "gallery",
+    "photo",
+    "responsive",
+    "mobile"
+  ],
   "license": "MIT",
   "homepage": "http://github.com/electerious/basicLightbox",
   "repository": {
