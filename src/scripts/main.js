@@ -1,12 +1,3 @@
-const each = function(data, fn) {
-
-	if (data==null) return false
-
-	if ((data).constructor===Object) return [].forEach.call(Object.keys(data), (key) => fn(data[key], key, data))
-	else                             return [].forEach.call(data, (item, i) => fn(item, i, data))
-
-}
-
 const stopEvent = function(e) {
 
 	if (typeof e.stopPropagation === 'function') e.stopPropagation()
@@ -18,8 +9,8 @@ const bindShow = function(elem, opts) {
 
 	elem.onclick = function(e) {
 
-		let id          = this.getAttribute('data-lightBox-show')
-		let contentElem = document.querySelector(`[data-lightBox="${ id }"]`)
+		let id          = this.getAttribute('data-basicLightbox-show')
+		let contentElem = document.querySelector(`[data-basicLightbox="${ id }"]`)
 
 		stopEvent(e)
 		show(contentElem.outerHTML, opts)
@@ -56,25 +47,25 @@ const validate = function(opts = {}) {
 const render = function(html = '') {
 
 	return (`
-		<div class="lightBox">
-			<div class="lightBox__close"></div>
-			<div class="lightBox__placeholder">${ html }</div>
+		<div class="basicLightbox">
+			<div class="basicLightbox__close"></div>
+			<div class="basicLightbox__placeholder">${ html }</div>
 		</div>
 	`)
 
 }
 
-export const visible = function() {
+export const exists = function() {
 
-	let elem = document.querySelector('.lightBox--visible')
+	let elem = document.querySelector('.basicLightbox')
 
 	return (elem==null ? false : true)
 
 }
 
-export const exists = function() {
+export const visible = function() {
 
-	let elem = document.querySelector('.lightBox')
+	let elem = document.querySelector('.basicLightbox--visible')
 
 	return (elem==null ? false : true)
 
@@ -83,7 +74,7 @@ export const exists = function() {
 export const show = function(html, opts) {
 
 	// Validate options
-	opts  = validate(opts)
+	opts = validate(opts)
 
 	// Run beforeShow event
 	// Stop execution when function returns false
@@ -93,17 +84,17 @@ export const show = function(html, opts) {
 	document.body.insertAdjacentHTML('beforeend', render(html))
 
 	// Get the newly created lightbox element
-	let elem = document.querySelector('.lightBox')
+	let elem = document.querySelector('.basicLightbox')
 
 	// Bind close element
-	if (opts.closable===true) bindClose(elem.querySelector('.lightBox__close'), opts)
+	if (opts.closable===true) bindClose(elem.querySelector('.basicLightbox__close'), opts)
 
 	// Wait a while to ensure that the class change triggers the animation
 	setTimeout(() => {
 		requestAnimationFrame(() => {
 
 			// Show lightbox
-			elem.classList.add('lightBox--visible')
+			elem.classList.add('basicLightbox--visible')
 
 			// Run afterShow event
 			opts.afterShow()
@@ -116,20 +107,20 @@ export const show = function(html, opts) {
 export const close = function(opts) {
 
 	// Validate options
-	opts  = validate(opts)
+	opts = validate(opts)
 
 	// Run beforeClose event
 	// Stop execution when function returns false
 	if (opts.beforeClose()===false) return false
 
 	// Get the lightbox element
-	let elem = document.querySelector('.lightBox')
+	let elem = document.querySelector('.basicLightbox')
 
 	// Don't continue to hide lightbox when element not visible
 	if (visible()===false) return false
 
 	// Hide lightbox
-	elem.classList.remove('lightBox--visible')
+	elem.classList.remove('basicLightbox--visible')
 
 	setTimeout(() => {
 		requestAnimationFrame(() => {
@@ -151,8 +142,8 @@ export const close = function(opts) {
 export const init = function(elems, opts) {
 
 	if (typeof elems === 'string') elems = document.querySelectorAll(elems)
-	if (elems==null)               elems = document.querySelectorAll('[data-lightBox-show]')
+	if (elems==null)               elems = document.querySelectorAll('[data-basicLightbox-show]')
 
-	each(elems, (elem) => bindShow(elem, opts))
+	Array.prototype.forEach.call(elems, (elem) => bindShow(elem, opts))
 
 }

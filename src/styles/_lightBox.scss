@@ -1,4 +1,4 @@
-.lightBox {
+.basicLightbox {
 
 	position: fixed;
 	display: flex;
@@ -49,7 +49,7 @@
 			max-width: 100%;
 		}
 
-		[data-lightBox] {
+		[data-basicLightbox] {
 			// Always show element no matter what
 			display: block !important;
 		}
@@ -61,7 +61,7 @@
 
 }
 
-[data-lightBox] {
+[data-basicLightbox] {
 
 	// Always hide element no matter what
 	display: none !important;
