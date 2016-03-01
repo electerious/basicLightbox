@@ -123,6 +123,8 @@ export const show = function(html, opts) {
 		})
 	}, 10)
 
+	return true
+
 }
 
 export const close = function(opts) {
@@ -157,6 +159,8 @@ export const close = function(opts) {
 
 		})
 	}, 410)
+
+	return true
 
 }
 
