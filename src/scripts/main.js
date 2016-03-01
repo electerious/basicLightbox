@@ -35,23 +35,25 @@ const validate = function(opts = {}) {
 
 	if (opts.closable!==false) opts.closable = true
 
-	if (typeof opts.beforeShow !== 'function') opts.beforeShow = () => {}
-	if (typeof opts.afterShow !== 'function')  opts.afterShow = () => {}
+	if (typeof opts.className === 'function') opts.className = opts.className()
+	if (typeof opts.className !== 'string')   opts.className = ''
 
+	if (typeof opts.beforeShow !== 'function')  opts.beforeShow = () => {}
+	if (typeof opts.afterShow !== 'function')   opts.afterShow = () => {}
 	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
 	if (typeof opts.afterClose !== 'function')  opts.afterClose = () => {}
 
 	if (typeof opts.beforeHTML === 'function') opts.beforeHTML = opts.beforeHTML()
-	if (typeof opts.afterHTML === 'function')  opts.afterHTML = opts.afterHTML()
+	if (typeof opts.beforeHTML !== 'string')   opts.beforeHTML = ''
 
-	if (typeof opts.beforeHTML !== 'string') opts.beforeHTML = ''
-	if (typeof opts.afterHTML !== 'string')  opts.afterHTML = ''
+	if (typeof opts.afterHTML === 'function') opts.afterHTML = opts.afterHTML()
+	if (typeof opts.afterHTML !== 'string')   opts.afterHTML = ''
 
 	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
-	if (typeof opts.afterPlaceholder === 'function')  opts.afterPlaceholder = opts.afterPlaceholder()
+	if (typeof opts.beforePlaceholder !== 'string')   opts.beforePlaceholder = ''
 
-	if (typeof opts.beforePlaceholder !== 'string') opts.beforePlaceholder = ''
-	if (typeof opts.afterPlaceholder !== 'string')  opts.afterPlaceholder = ''
+	if (typeof opts.afterPlaceholder === 'function') opts.afterPlaceholder = opts.afterPlaceholder()
+	if (typeof opts.afterPlaceholder !== 'string')   opts.afterPlaceholder = ''
 
 	return opts
 
@@ -60,7 +62,7 @@ const validate = function(opts = {}) {
 const render = function(html = '', opts) {
 
 	return (`
-		<div class="basicLightbox">
+		<div class="basicLightbox ${ opts.className }">
 			<div class="basicLightbox__close"></div>
 			${ opts.beforePlaceholder }
 			<div class="basicLightbox__placeholder">
