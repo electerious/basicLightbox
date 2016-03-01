@@ -180,7 +180,7 @@ Parameters:
 
 ### Exists
 
-Returns `true` when a lightbox exists and `false` otherwise. Attention: basicLightbox will make the elements visible right after adding them to the DOM. It's possible that a lightbox exists, but isn't [visible](#visible).
+Returns `true` when a lightbox exists and `false` otherwise. Attention: basicLightbox will make its elements visible right after adding them to the DOM. It's possible that a lightbox exist, but isn't [visible](#visible), yet.
 
 Syntax:
 ```js
