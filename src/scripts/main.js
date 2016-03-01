@@ -11,9 +11,10 @@ const bindShow = function(elem, opts) {
 
 		let id          = this.getAttribute('data-basicLightbox-show')
 		let contentElem = document.querySelector(`[data-basicLightbox="${ id }"]`)
+		let html        = contentElem.outerHTML
 
 		stopEvent(e)
-		show(contentElem.outerHTML, opts)
+		show(html, opts)
 
 	}
 
