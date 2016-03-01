@@ -37,6 +37,10 @@
 			user-select: none;
 		}
 
+		div.classNames {
+			background: #2875ed;
+		}
+
 	</style>
 
 	<img src="http://placehold.it/1400x900" width="1400" height="900" data-basicLightbox="0">
@@ -87,6 +91,12 @@
 	</div>
 	<a href="#" class="button custom" data-basicLightbox-show="8">custom</a>
 
+	<div data-basicLightbox="9">
+		<h1>Custom classNames</h1>
+		<p>You can add custom classNames to the lightbox element.</p>
+	</div>
+	<a href="#" class="button classNames" data-basicLightbox-show="9">classNames</a>
+
 	<script src="../dist/basicLightbox.min.js"></script>
 
 	<script>
@@ -101,6 +111,8 @@
 			beforeClose: function() { console.log('beforeClose'); return false }
 		})
 		basicLightbox.init('.button.invalid', {
+			closable          : null,
+			className         : null,
 			beforeShow        : null,
 			afterShow         : null,
 			beforeClose       : null,
@@ -121,6 +133,9 @@
 			afterPlaceholder  : 'afterPlaceholder',
 			beforeHTML        : function() { return 'beforeHTML' },
 			afterHTML         : 'afterHTML'
+		})
+		basicLightbox.init('.button.classNames', {
+			className: 'classNames'
 		})
 
 	</script>
