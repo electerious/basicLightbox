@@ -13,8 +13,8 @@ const bindShow = function(elem, opts) {
 		let contentElem = document.querySelector(`[data-basicLightbox="${ id }"]`)
 		let html        = contentElem.outerHTML
 
-		stopEvent(e)
 		show(html, opts)
+		stopEvent(e)
 
 	}
 
@@ -24,8 +24,8 @@ const bindClose = function(elem, opts) {
 
 	elem.onclick = function(e) {
 
-		stopEvent(e)
 		close(opts)
+		stopEvent(e)
 
 	}
 
