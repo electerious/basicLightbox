@@ -94,6 +94,9 @@ export const visible = function() {
 
 export const show = function(html, opts) {
 
+	// Don't continue to show lightbox when element already exists
+	if (exists()===true) return false
+
 	// Validate options
 	opts = validate(opts)
 
