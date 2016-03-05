@@ -15,6 +15,7 @@ The lightest lightbox ever made.
 	- [Close](#close)
 	- [Exists](#exists)
 	- [Visible](#visible)
+- [Options](#options)
 
 ## Demos
 
