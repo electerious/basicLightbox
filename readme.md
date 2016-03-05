@@ -195,3 +195,41 @@ Syntax:
 ```js
 basicLightbox.visible()
 ```
+
+## Options
+
+The option-object can include the following properties:
+
+```js
+{
+	/*
+	 * Prevents the lightbox from closing when clicking its background.
+	 */
+	closable: true,
+	/*
+	 * One or more space-separated classes to be added to the basicLightbox element.
+	 * Must be a string or a function which returns a string.
+	 */
+	className: null,
+	/*
+	 * Callback functions.
+	 * Returning false will stop the caller function and prevent the lightbox from showing or closing.
+	 */
+	beforeShow  : () => {},
+	afterShow   : () => {},
+	beforeClose : () => {},
+	afterClose  : () => {},
+	/*
+	 * String containing HTML or function which returns a string of HTML.
+	 * Will be added before or after the content of the lightbox.
+	 */
+	beforeHTML : '',
+	afterHTML  : '',
+	/*
+	 * String containing HTML or function which returns a string of HTML.
+	 * Will be added before or after the content-placeholder of the lightbox.
+	 */
+	beforePlaceholder : '',
+	afterPlaceholder  : ''
+}
+```
