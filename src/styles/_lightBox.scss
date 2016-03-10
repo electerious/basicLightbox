@@ -49,8 +49,8 @@
 			max-width: 100%;
 		}
 
-		[data-basicLightbox] {
-			// Always show element no matter what
+		> [data-basicLightbox] {
+			// Always show content no matter what
 			display: block !important;
 		}
 	}
