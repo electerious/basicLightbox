@@ -21,7 +21,7 @@ The lightest lightbox ever made.
 
 | Name | Description | Link |
 |:-----------|:------------|:------------|
-| Default | Includes all features. | [Demo](#) |
+| Default | Includes all features. | [Demo](http://codepen.io/electerious/pen/oxLZwq) |
 
 ## Features
 
