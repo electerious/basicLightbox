@@ -169,9 +169,9 @@ export const close = function(opts) {
 
 export const init = function(elems, opts) {
 
-	if (typeof elems === 'string') elems = [ ...document.querySelectorAll(elems) ]
-	if (elems==null)               elems = [ ...document.querySelectorAll('[data-basicLightbox-show]') ]
+	if (typeof elems === 'string') elems = document.querySelectorAll(elems)
+	if (elems==null)               elems = document.querySelectorAll('[data-basicLightbox-show]')
 
-	elems.forEach((elem) => bindShow(elem, opts))
+	Array.prototype.forEach.call(elems, (elem) => bindShow(elem, opts))
 
 }
