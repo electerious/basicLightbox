@@ -35,8 +35,9 @@ The lightest lightbox ever made.
 
 basicLightbox dependents on the following browser APIs:
 
-- [classList](http://caniuse.com/#feat=classlist)
-- [Flexible Box Layout Module](http://caniuse.com/#feat=flexbox)
+- [classList](https://dom.spec.whatwg.org/#dom-element-classlist)
+- [Pointer Events](https://www.w3.org/TR/pointerevents/)
+- [Flexible Box Layout Module](https://www.w3.org/TR/css3-flexbox/)
 
 Some of these APIs are capable of being polyfilled in older browser. Check the linked resources above to determine if you must polyfill to achieve your desired level of browser support.
 
