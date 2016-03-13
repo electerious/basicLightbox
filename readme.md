@@ -48,6 +48,7 @@ We recommend to install basicLightbox using [Bower](http://bower.io/) or [npm](h
 ```sh
 bower install basicLightbox
 ```
+
 ```sh
 npm install basiclightbox
 ```
@@ -57,6 +58,7 @@ Include the CSS-file in the `head` and the JS-file at the end of your `body`:
 ```html
 <link rel="stylesheet" href="dist/basicLightbox.min.css">
 ```
+
 ```html
 <script src="dist/basicLightbox.min.js"></script>
 ```
@@ -104,20 +106,25 @@ basicLightbox comes with a handful of handy functions. Below are all of them alo
 Binds click events to all elements with the `data-basicLightbox-show` attribute or to a custom set of elements. You can also skip this step and manually trigger a lightbox using the [show](#show)-function.
 
 Syntax:
+
 ```js
 basicLightbox.init(elements, options)
 ```
 
 Examples:
+
 ```js
 basicLightbox.init()
 ```
+
 ```js
 basicLightbox.init('.button')
 ```
+
 ```js
 basicLightbox.init(document.querySelectorAll('.button'))
 ```
+
 ```js
 basicLightbox.init(null, {
 	closable: false
@@ -125,6 +132,7 @@ basicLightbox.init(null, {
 ```
 
 Parameters:
+
 - `elements` `{String | NodeList | null}` Elements which should show a lightbox when clicked. All of them must have the `data-basicLightbox-show` attribute with a corresponding `data-basicLightbox` element.
 - `options` `{Object | null}` An object of [options](#options).
 
@@ -133,16 +141,19 @@ Parameters:
 Shows a lightbox with any kind of HTML.
 
 Syntax:
+
 ```js
 basicLightbox.show(html, options)
 ```
 
 Examples:
+
 ```js
 basicLightbox.show(`
 	<img src="http://placehold.it/1400x900" width="1400" height="900">
 `)
 ```
+
 ```js
 basicLightbox.show(`
 	<div>
@@ -155,6 +166,7 @@ basicLightbox.show(`
 ```
 
 Parameters:
+
 - `html` `{String}` Any kind of HTML. Will be placed centered inside the lightbox.
 - `options` `{Object | null}` An object of [options](#options).
 
@@ -163,14 +175,17 @@ Parameters:
 Closes the visible lightbox.
 
 Syntax:
+
 ```js
 basicLightbox.close(options)
 ```
 
 Examples:
+
 ```js
 basicLightbox.close()
 ```
+
 ```js
 basicLightbox.close({
 	afterClose: () => console.log('afterClose')
@@ -178,6 +193,7 @@ basicLightbox.close({
 ```
 
 Parameters:
+
 - `options` `{Object | null}` An object of [options](#options).
 
 ### Exists
@@ -185,6 +201,7 @@ Parameters:
 Returns `true` when a lightbox exists and `false` otherwise. Attention: basicLightbox will make its elements visible right after adding them to the DOM. It's possible that a lightbox exist, but isn't [visible](#visible), yet.
 
 Syntax:
+
 ```js
 basicLightbox.exists()
 ```
@@ -194,6 +211,7 @@ basicLightbox.exists()
 Returns `true` when a lightbox is visible and `false` otherwise. Attention: It's possible that a lightbox isn't visible, but [exists](#exists).
 
 Syntax:
+
 ```js
 basicLightbox.visible()
 ```
