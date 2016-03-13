@@ -76,6 +76,15 @@ const render = function(html = '', opts) {
 
 }
 
+const containsIMG = function(elem) {
+
+	let children = elem.children
+
+	if (children.length===1 && children[0].tagName==='IMG') return true
+	return false
+
+}
+
 export const exists = function() {
 
 	let elem = document.querySelector('.basicLightbox')
@@ -109,6 +118,13 @@ export const show = function(html, opts) {
 
 	// Get the newly created lightbox element
 	let elem = document.querySelector('.basicLightbox')
+
+	// Check if placeholder contains only an image
+	let _containsIMG = containsIMG(elem.querySelector('.basicLightbox__placeholder'))
+
+	// Add img class to lightbox when it only contains an image
+	// This class is necessary to center the image properly
+	if (_containsIMG===true) elem.classList.add('basicLightbox--img')
 
 	// Bind close element
 	if (opts.closable===true) bindClose(elem.querySelector('.basicLightbox__close'), opts)

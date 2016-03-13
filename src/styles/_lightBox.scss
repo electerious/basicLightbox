@@ -37,22 +37,33 @@
 		will-change: transform;
 
 		> img {
-			margin: 0;
-			max-height: 100%;
-			max-width: 100%;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: auto;
+			max-width: 95%;
+			max-height: 95%;
 			width: auto;
 			height: auto;
 		}
 
 		> iframe {
-			margin: 0;
-			max-width: 100%;
+			margin: 0 auto;
+			max-width: 95%;
 		}
 
 		> [data-basicLightbox] {
 			// Always show content no matter what
 			display: block !important;
 		}
+	}
+
+	&--img &__placeholder {
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
 	}
 
 	&--visible &__placeholder {
