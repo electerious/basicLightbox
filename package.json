@@ -28,6 +28,11 @@
     "type": "git",
     "url": "https://github.com/electerious/basicLightbox.git"
   },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE.md"
+  ],
   "devDependencies": {
     "@electerious/basictasks": "1.3.0",
     "gulp": "^3.9.1"
