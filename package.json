@@ -30,8 +30,7 @@
   },
   "files": [
     "dist",
-    "src",
-    "LICENSE.md"
+    "src"
   ],
   "devDependencies": {
     "@electerious/basictasks": "1.3.0",
