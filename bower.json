@@ -16,6 +16,12 @@
     "responsive",
     "mobile"
   ],
+  "ignore": [
+    "**/.*",
+    "demos",
+    "gulpfile.js",
+    "package.json"
+  ],
   "license": "MIT",
   "homepage": "http://github.com/electerious/basicLightbox",
   "repository": {
