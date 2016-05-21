@@ -33,7 +33,7 @@
     "src"
   ],
   "devDependencies": {
-    "@electerious/basictasks": "1.3.0",
+    "@electerious/basictasks": "1.4.0",
     "gulp": "^3.9.1"
   }
 }
