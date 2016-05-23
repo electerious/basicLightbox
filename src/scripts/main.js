@@ -33,6 +33,8 @@ const bindClose = function(elem, opts) {
 
 const validate = function(opts = {}) {
 
+	opts = Object.assign({}, opts)
+
 	if (opts.closable!==false) opts.closable = true
 
 	if (typeof opts.className === 'function') opts.className = opts.className()
