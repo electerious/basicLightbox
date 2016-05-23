@@ -80,8 +80,7 @@ const containsIMG = function(elem) {
 
 	let children = elem.children
 
-	if (children.length===1 && children[0].tagName==='IMG') return true
-	return false
+	return (children.length===1 && children[0].tagName==='IMG' ? true : false)
 
 }
 
