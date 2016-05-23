@@ -80,7 +80,7 @@ const render = function(html = '', opts) {
 
 const containsIMG = function(elem) {
 
-	let children = elem.children
+	const children = elem.children
 
 	return (children.length===1 && children[0].tagName==='IMG' ? true : false)
 
@@ -88,7 +88,7 @@ const containsIMG = function(elem) {
 
 export const exists = function() {
 
-	let elem = document.querySelector('.basicLightbox')
+	const elem = document.querySelector('.basicLightbox')
 
 	return (elem==null ? false : true)
 
@@ -96,7 +96,7 @@ export const exists = function() {
 
 export const visible = function() {
 
-	let elem = document.querySelector('.basicLightbox--visible')
+	const elem = document.querySelector('.basicLightbox--visible')
 
 	return (elem==null ? false : true)
 
@@ -118,10 +118,10 @@ export const show = function(html, opts) {
 	document.body.insertAdjacentHTML('beforeend', render(html, opts))
 
 	// Get the newly created lightbox element
-	let elem = document.querySelector('.basicLightbox')
+	const elem = document.querySelector('.basicLightbox')
 
 	// Check if placeholder contains only an image
-	let _containsIMG = containsIMG(elem.querySelector('.basicLightbox__placeholder'))
+	const _containsIMG = containsIMG(elem.querySelector('.basicLightbox__placeholder'))
 
 	// Add img class to lightbox when it only contains an image
 	// This class is necessary to center the image properly
@@ -157,7 +157,7 @@ export const close = function(opts) {
 	if (opts.beforeClose()===false) return false
 
 	// Get the lightbox element
-	let elem = document.querySelector('.basicLightbox')
+	const elem = document.querySelector('.basicLightbox')
 
 	// Don't continue to hide lightbox when element not visible
 	if (visible()===false) return false
