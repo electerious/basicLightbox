@@ -57,7 +57,6 @@ const render = function(html = '', opts) {
 
 	// Add lightbox content
 	elem.innerHTML = `
-		<div class="basicLightbox__close"></div>
 		${ opts.beforePlaceholder }
 		<div class="basicLightbox__placeholder">
 			${ html }
@@ -186,13 +185,22 @@ export const create = function(html, opts) {
 	}
 
 	// Close lightbox when clicking the background
-	if (opts.closable===true) elem.querySelector('.basicLightbox__close').onclick = function(e) {
+	if (opts.closable===true) elem.onclick = function(e) {
 
+		// If e.target is not the same element as this,
+		// then the user clicked a descendant of the element
+		if (e.target!==this) return false
+
+		// Close lightbox with the instance function
 		_close()
+
+		// Prevent default event and propagation
 		stopEvent(e)
 
 	}
 
+	// Assign instance to a variable so the instance can be used
+	// elsewhere in the current function
 	const instance = {
 		element : _element,
 		visible : _visible,
