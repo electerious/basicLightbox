@@ -124,11 +124,11 @@
 			var target = getTarget(this)
 
 			basicLightbox.from(target, {
-				beforeShow  : function() { console.log('beforeShow (opts)') },
-				afterShow   : function() { console.log('afterShow (opts)') },
-				beforeClose : function() { console.log('beforeClose (opts)') },
-				afterClose  : function() { console.log('afterClose (opts)') }
-			}).show(function() { console.log('afterShow (show)') })
+				beforeShow  : function(instance) { console.log('beforeShow (opts)', instance) },
+				afterShow   : function(instance) { console.log('afterShow (opts)', instance) },
+				beforeClose : function(instance) { console.log('beforeClose (opts)', instance) },
+				afterClose  : function(instance) { console.log('afterClose (opts)', instance) }
+			}).show(function(instance) { console.log('afterShow (show)', instance) })
 
 		}
 
