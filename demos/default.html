@@ -57,7 +57,7 @@
 
 	<div data-basicLightbox data-id="3">
 		<h1>Callbacks</h1>
-		<p>Take a look at the console of your browser.</p>
+		<p>Take a look at the console of your browser.<br>This lightbox will close automaticly to demonstrate the close-callback.</p>
 	</div>
 	<a href="#" class="button callbacks" data-show-id="3">callbacks</a>
 
@@ -125,12 +125,20 @@
 
 			var target = getTarget(this)
 
-			basicLightbox.from(target, {
-				beforeShow  : function(instance) { console.log('beforeShow (opts)', instance) },
-				afterShow   : function(instance) { console.log('afterShow (opts)', instance) },
-				beforeClose : function(instance) { console.log('beforeClose (opts)', instance) },
-				afterClose  : function(instance) { console.log('afterClose (opts)', instance) }
-			}).show(function(instance) { console.log('afterShow (show)', instance) })
+			var instance = basicLightbox.from(target, {
+				beforeShow  : function(instance) { console.log('beforeShow', instance) },
+				afterShow   : function(instance) { console.log('afterShow', instance) },
+				beforeClose : function(instance) { console.log('beforeClose', instance) },
+				afterClose  : function(instance) { console.log('afterClose', instance) }
+			})
+
+			instance.show(function(instance) { console.log('finished show()', instance) })
+
+			setTimeout(function() {
+
+				instance.close(function(instance) { console.log('finished close()', instance) })
+
+			}, 3000)
 
 		}
 
