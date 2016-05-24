@@ -43,101 +43,177 @@
 
 	</style>
 
-	<img width="1400" height="900" src="http://placehold.it/1400x900" data-basicLightbox="0">
-	<a href="#" class="button" data-basicLightbox-show="0">img</a>
+	<img width="1400" height="900" src="http://placehold.it/1400x900" data-basicLightbox data-id="0">
+	<a href="#" class="button" data-show-id="0">img</a>
 
-	<iframe width="560" height="315" src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen data-basicLightbox="1"></iframe>
-	<a href="#" class="button" data-basicLightbox-show="1">iframe</a>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen data-basicLightbox data-id="1"></iframe>
+	<a href="#" class="button" data-show-id="1">iframe</a>
 
-	<div data-basicLightbox="2">
+	<div data-basicLightbox data-id="2">
 		<h1>DIV</h1>
 		<p>I'm a div inside a lightbox.</p>
 	</div>
-	<a href="#" class="button" data-basicLightbox-show="2">div</a>
+	<a href="#" class="button" data-show-id="2">div</a>
 
-	<div data-basicLightbox="3">
+	<div data-basicLightbox data-id="3">
 		<h1>Callbacks</h1>
 		<p>Take a look at the console of your browser.</p>
 	</div>
-	<a href="#" class="button callbacks" data-basicLightbox-show="3">callbacks</a>
+	<a href="#" class="button callbacks" data-show-id="3">callbacks</a>
 
-	<div data-basicLightbox="4">
+	<div data-basicLightbox data-id="4">
 		<h1>Blocked</h1>
 		<p>It's not possible to close this lightbox,<br>because the beforeClose function returns false.</p>
 	</div>
-	<a href="#" class="button blocked" data-basicLightbox-show="4">blocked</a>
+	<a href="#" class="button blocked" data-show-id="4">blocked</a>
 
-	<div data-basicLightbox="5">
+	<div data-basicLightbox data-id="5">
 		<h1>Invalid</h1>
 		<p>No callback should fire, because non of them is a function.<br>No HTML should be appended, because non of them is a function or string.</p>
 	</div>
-	<a href="#" class="button invalid" data-basicLightbox-show="5">invalid</a>
+	<a href="#" class="button invalid" data-show-id="5">invalid</a>
 
-	<div data-basicLightbox="6">
+	<div data-basicLightbox data-id="6">
 		<h1>Closable</h1>
 		<p>It's possible to close this lightbox with a click (default).</p>
 	</div>
-	<a href="#" class="button closable" data-basicLightbox-show="6">closable</a>
+	<a href="#" class="button closable" data-show-id="6">closable</a>
 
-	<div data-basicLightbox="7">
+	<div data-basicLightbox data-id="7">
 		<h1>Not closable</h1>
 		<p>It's not possible to close this lightbox with a click.<br>Use basicLightbox.close() instead.</p>
 	</div>
-	<a href="#" class="button notclosable" data-basicLightbox-show="7">not closable</a>
+	<a href="#" class="button notclosable" data-show-id="7">not closable</a>
 
-	<div data-basicLightbox="8">
+	<div data-basicLightbox data-id="8">
 		<h1>Custom HTML</h1>
 		<p>You can add custom HTML inside and outside, before and after the placeholder.</p>
 	</div>
-	<a href="#" class="button custom" data-basicLightbox-show="8">custom</a>
+	<a href="#" class="button custom" data-show-id="8">custom</a>
 
-	<div data-basicLightbox="9">
+	<div data-basicLightbox data-id="9">
 		<h1>Custom classNames</h1>
 		<p>You can add custom classNames to the lightbox element.</p>
 	</div>
-	<a href="#" class="button classNames" data-basicLightbox-show="9">classNames</a>
+	<a href="#" class="button classNames" data-show-id="9">classNames</a>
+
+	<a href="#" class="button dynamic">dynamic</a>
 
 	<script src="../dist/basicLightbox.min.js"></script>
 
 	<script>
 
-		basicLightbox.init()
-		basicLightbox.init('.button.callbacks', {
-			beforeShow  : function() { console.log('beforeShow') },
-			afterShow   : function() { console.log('afterShow') },
-			beforeClose : function() { console.log('beforeClose') },
-			afterClose  : function() { console.log('afterClose') }
+		var getTarget = function(elem) {
+
+			var id = elem.getAttribute('data-show-id')
+
+			return document.querySelector(`[data-id="${ id }"]`)
+
+		}
+
+		Array.prototype.forEach.call(document.querySelectorAll('[data-show-id]'), function(elem) {
+
+			var target = getTarget(elem)
+
+			elem.onclick = basicLightbox.from(target).show
+
 		})
-		basicLightbox.init('.button.blocked', {
-			beforeClose: function() { console.log('beforeClose'); return false }
-		})
-		basicLightbox.init('.button.invalid', {
-			closable          : null,
-			className         : null,
-			beforeShow        : null,
-			afterShow         : null,
-			beforeClose       : null,
-			afterClose        : null,
-			beforePlaceholder : null,
-			afterPlaceholder  : null,
-			beforeHTML        : null,
-			afterHTML         : null
-		})
-		basicLightbox.init('.button.closable', {
-			closable: true
-		})
-		basicLightbox.init('.button.notclosable', {
-			closable: false
-		})
-		basicLightbox.init('.button.custom', {
-			beforePlaceholder : function() { return 'beforePlaceholder' },
-			afterPlaceholder  : 'afterPlaceholder',
-			beforeHTML        : function() { return 'beforeHTML' },
-			afterHTML         : 'afterHTML'
-		})
-		basicLightbox.init('.button.classNames', {
-			className: 'classNames'
-		})
+
+		document.querySelector('.button.callbacks').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				beforeShow  : function() { console.log('beforeShow (opts)') },
+				afterShow   : function() { console.log('afterShow (opts)') },
+				beforeClose : function() { console.log('beforeClose (opts)') },
+				afterClose  : function() { console.log('afterClose (opts)') }
+			}).show(function() { console.log('afterShow (show)') })
+
+		}
+
+		document.querySelector('.button.blocked').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				beforeClose: function() { return false }
+			}).show()
+
+		}
+
+		document.querySelector('.button.invalid').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				closable          : null,
+				className         : null,
+				beforeShow        : null,
+				afterShow         : null,
+				beforeClose       : null,
+				afterClose        : null,
+				beforePlaceholder : null,
+				afterPlaceholder  : null,
+				beforeHTML        : null,
+				afterHTML         : null
+			}).show()
+
+		}
+
+		document.querySelector('.button.closable').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				closable: true
+			}).show()
+
+		}
+
+		document.querySelector('.button.notclosable').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				closable: false
+			}).show()
+
+		}
+
+		document.querySelector('.button.custom').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				beforePlaceholder : function() { return 'beforePlaceholder' },
+				afterPlaceholder  : 'afterPlaceholder',
+				beforeHTML        : function() { return 'beforeHTML' },
+				afterHTML         : 'afterHTML'
+			}).show()
+
+		}
+
+		document.querySelector('.button.classNames').onclick = function(e) {
+
+			var target = getTarget(this)
+
+			basicLightbox.from(target, {
+				className: 'classNames'
+			}).show()
+
+		}
+
+		document.querySelector('.button.dynamic').onclick = function(e) {
+
+			var html = ''
+
+			html += '<h1>Dynamic Content</h1>'
+			html += '<p>You can generate the content of the lightbox with JS.</p>'
+
+			basicLightbox.create(html).show()
+
+		}
 
 	</script>
 
