@@ -87,7 +87,7 @@
 
 	<div data-basicLightbox data-id="8">
 		<h1>Custom HTML</h1>
-		<p>You can add custom HTML inside and outside, before and after the placeholder.</p>
+		<p>You can add custom HTML before and after the HTML placeholder element.</p>
 	</div>
 	<a href="#" class="button custom" data-show-id="8">custom</a>
 
@@ -187,9 +187,7 @@
 
 			basicLightbox.from(target, {
 				beforePlaceholder : function() { return 'beforePlaceholder' },
-				afterPlaceholder  : 'afterPlaceholder',
-				beforeHTML        : function() { return 'beforeHTML' },
-				afterHTML         : 'afterHTML'
+				afterPlaceholder  : 'afterPlaceholder'
 			}).show()
 
 		}
