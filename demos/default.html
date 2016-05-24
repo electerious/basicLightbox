@@ -105,27 +105,28 @@
 
 	<script>
 
-		var getTarget = function(elem) {
+		var getTargetHTML = function(elem) {
 
-			var id = elem.getAttribute('data-show-id')
+			var id     = elem.getAttribute('data-show-id')
+			var target = document.querySelector(`[data-id="${ id }"]`)
 
-			return document.querySelector(`[data-id="${ id }"]`)
+			return target.outerHTML
 
 		}
 
 		Array.prototype.forEach.call(document.querySelectorAll('[data-show-id]'), function(elem) {
 
-			var target = getTarget(elem)
+			var html = getTargetHTML(elem)
 
-			elem.onclick = basicLightbox.from(target).show
+			elem.onclick = basicLightbox.create(html).show
 
 		})
 
 		document.querySelector('.button.callbacks').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			var instance = basicLightbox.from(target, {
+			var instance = basicLightbox.create(html, {
 				beforeShow  : function(instance) { console.log('beforeShow', instance) },
 				afterShow   : function(instance) { console.log('afterShow', instance) },
 				beforeClose : function(instance) { console.log('beforeClose', instance) },
@@ -144,9 +145,9 @@
 
 		document.querySelector('.button.blocked').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			basicLightbox.from(target, {
+			basicLightbox.create(html, {
 				beforeClose: function() { return false }
 			}).show()
 
@@ -154,9 +155,9 @@
 
 		document.querySelector('.button.invalid').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			basicLightbox.from(target, {
+			basicLightbox.create(html, {
 				closable          : null,
 				className         : null,
 				beforeShow        : null,
@@ -171,9 +172,9 @@
 
 		document.querySelector('.button.closable').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			basicLightbox.from(target, {
+			basicLightbox.create(html, {
 				closable: true
 			}).show()
 
@@ -181,9 +182,9 @@
 
 		document.querySelector('.button.notclosable').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			basicLightbox.from(target, {
+			basicLightbox.create(html, {
 				closable: false
 			}).show()
 
@@ -191,9 +192,9 @@
 
 		document.querySelector('.button.custom').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			basicLightbox.from(target, {
+			basicLightbox.create(html, {
 				beforePlaceholder : function() { return 'beforePlaceholder' },
 				afterPlaceholder  : 'afterPlaceholder'
 			}).show()
@@ -202,9 +203,9 @@
 
 		document.querySelector('.button.classNames').onclick = function(e) {
 
-			var target = getTarget(this)
+			var html = getTargetHTML(this)
 
-			basicLightbox.from(target, {
+			basicLightbox.create(html, {
 				className: 'classNames'
 			}).show()
 
@@ -215,7 +216,7 @@
 			var html = ''
 
 			html += '<h1>Dynamic Content</h1>'
-			html += '<p>You can generate the content of the lightbox with JS.</p>'
+			html += '<p>You can set the content of the lightbox with JS.</p>'
 
 			basicLightbox.create(html).show()
 

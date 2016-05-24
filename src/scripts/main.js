@@ -203,11 +203,3 @@ export const create = function(html, opts) {
 	return instance
 
 }
-
-export const from = function(elem, opts) {
-
-	const html = elem.outerHTML
-
-	return create(html, opts)
-
-}
