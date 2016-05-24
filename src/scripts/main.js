@@ -19,12 +19,6 @@ const validate = function(opts = {}) {
 	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
 	if (typeof opts.afterClose !== 'function')  opts.afterClose = () => {}
 
-	if (typeof opts.beforeHTML === 'function') opts.beforeHTML = opts.beforeHTML()
-	if (typeof opts.beforeHTML !== 'string')   opts.beforeHTML = ''
-
-	if (typeof opts.afterHTML === 'function') opts.afterHTML = opts.afterHTML()
-	if (typeof opts.afterHTML !== 'string')   opts.afterHTML = ''
-
 	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
 	if (typeof opts.beforePlaceholder !== 'string')   opts.beforePlaceholder = ''
 
@@ -66,9 +60,7 @@ const render = function(html = '', opts) {
 		<div class="basicLightbox__close"></div>
 		${ opts.beforePlaceholder }
 		<div class="basicLightbox__placeholder">
-			${ opts.beforeHTML }
 			${ html }
-			${ opts.afterHTML }
 		</div>
 		${ opts.afterPlaceholder }
 	`
