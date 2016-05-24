@@ -128,6 +128,13 @@ export const create = function(html, opts) {
 	// Render the lightbox element
 	const elem = render(html, opts)
 
+	// Returns the lightbox element
+	const _element = () => {
+
+		return elem
+
+	}
+
 	// Check if the lightbox is attached to the DOM
 	const _visible = () => {
 
@@ -140,16 +147,16 @@ export const create = function(html, opts) {
 
 		// Run beforeShow event
 		// Stop execution when function returns false
-		if (opts.beforeShow()===false) return false
+		if (opts.beforeShow(instance)===false) return false
 
 		// Show the lightbox
 		show(elem, () => {
 
 			// Run afterShow event
-			opts.afterShow()
+			opts.afterShow(instance)
 
 			// Continue with the callback when available
-			if (typeof next === 'function') return next()
+			if (typeof next === 'function') return next(instance)
 
 		})
 
@@ -162,15 +169,15 @@ export const create = function(html, opts) {
 
 		// Run beforeClose event
 		// Stop execution when function returns false
-		if (opts.beforeClose()===false) return false
+		if (opts.beforeClose(instance)===false) return false
 
 		close(elem, () => {
 
 			// Run afterClose event
-			opts.afterClose()
+			opts.afterClose(instance)
 
 			// Continue with the callback when available
-			if (typeof next === 'function') return next()
+			if (typeof next === 'function') return next(instance)
 
 		})
 
@@ -186,11 +193,14 @@ export const create = function(html, opts) {
 
 	}
 
-	return {
+	const instance = {
+		element : _element,
 		visible : _visible,
 		show    : _show,
 		close   : _close
 	}
+
+	return instance
 
 }
 
