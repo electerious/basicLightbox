@@ -99,6 +99,8 @@
 
 	<a href="#" class="button dynamic">dynamic</a>
 
+	<a href="#" class="button stack">stack</a>
+
 	<script src="../dist/basicLightbox.min.js"></script>
 
 	<script>
@@ -212,6 +214,18 @@
 			basicLightbox.create(html).show()
 
 		}
+
+		var openStack = function(e) {
+
+			var html     = '<a class="button">Open another lightbox on top</a>'
+			var instance = basicLightbox.create(html)
+
+			instance.element().querySelector('.button').onclick = openStack
+			instance.show()
+
+		}
+
+		document.querySelector('.button.stack').onclick = openStack
 
 	</script>
 
