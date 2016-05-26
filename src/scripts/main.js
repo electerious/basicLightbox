@@ -5,49 +5,19 @@ const stopEvent = function(e) {
 
 }
 
-const bindShow = function(elem, opts) {
-
-	elem.onclick = function(e) {
-
-		let id          = this.getAttribute('data-basicLightbox-show')
-		let contentElem = document.querySelector(`[data-basicLightbox="${ id }"]`)
-		let html        = contentElem.outerHTML
-
-		show(html, opts)
-		stopEvent(e)
-
-	}
-
-}
-
-const bindClose = function(elem, opts) {
-
-	elem.onclick = function(e) {
-
-		close(opts)
-		stopEvent(e)
-
-	}
-
-}
-
 const validate = function(opts = {}) {
+
+	opts = Object.assign({}, opts)
 
 	if (opts.closable!==false) opts.closable = true
 
 	if (typeof opts.className === 'function') opts.className = opts.className()
-	if (typeof opts.className !== 'string')   opts.className = ''
+	if (typeof opts.className !== 'string')   opts.className = null
 
 	if (typeof opts.beforeShow !== 'function')  opts.beforeShow = () => {}
 	if (typeof opts.afterShow !== 'function')   opts.afterShow = () => {}
 	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
 	if (typeof opts.afterClose !== 'function')  opts.afterClose = () => {}
-
-	if (typeof opts.beforeHTML === 'function') opts.beforeHTML = opts.beforeHTML()
-	if (typeof opts.beforeHTML !== 'string')   opts.beforeHTML = ''
-
-	if (typeof opts.afterHTML === 'function') opts.afterHTML = opts.afterHTML()
-	if (typeof opts.afterHTML !== 'string')   opts.afterHTML = ''
 
 	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
 	if (typeof opts.beforePlaceholder !== 'string')   opts.beforePlaceholder = ''
@@ -59,75 +29,56 @@ const validate = function(opts = {}) {
 
 }
 
-const render = function(html = '', opts) {
-
-	return (`
-		<div class="basicLightbox ${ opts.className }">
-			<div class="basicLightbox__close"></div>
-			${ opts.beforePlaceholder }
-			<div class="basicLightbox__placeholder">
-				${ opts.beforeHTML }
-				${ html }
-				${ opts.afterHTML }
-			</div>
-			${ opts.afterPlaceholder }
-		</div>
-	`)
-
-}
-
 const containsIMG = function(elem) {
 
-	let children = elem.children
+	const children = elem.children
 
-	if (children.length===1 && children[0].tagName==='IMG') return true
-	return false
-
-}
-
-export const exists = function() {
-
-	let elem = document.querySelector('.basicLightbox')
-
-	return (elem==null ? false : true)
+	return (children.length===1 && children[0].tagName==='IMG' ? true : false)
 
 }
 
-export const visible = function() {
+export const visible = function(elem) {
 
-	let elem = document.querySelector('.basicLightbox--visible')
+	elem = elem || document.querySelector('.basicLightbox')
 
-	return (elem==null ? false : true)
+	return (elem!=null && elem.ownerDocument.body.contains(elem)===true ? true : false)
 
 }
 
-export const show = function(html, opts) {
+const render = function(html = '', opts) {
 
-	// Don't continue to show lightbox when element already exists
-	if (exists()===true) return false
+	const elem = document.createElement('div')
 
-	// Validate options
-	opts = validate(opts)
+	// Add the default class
+	elem.classList.add('basicLightbox')
 
-	// Run beforeShow event
-	// Stop execution when function returns false
-	if (opts.beforeShow()===false) return false
+	// Add a custom class when available
+	if (opts.className!=null) elem.classList.add(opts.className)
 
-	// Append lightbox to DOM
-	document.body.insertAdjacentHTML('beforeend', render(html, opts))
-
-	// Get the newly created lightbox element
-	let elem = document.querySelector('.basicLightbox')
+	// Add lightbox content
+	elem.innerHTML = `
+		${ opts.beforePlaceholder }
+		<div class="basicLightbox__placeholder">
+			${ html }
+		</div>
+		${ opts.afterPlaceholder }
+	`
 
 	// Check if placeholder contains only an image
-	let _containsIMG = containsIMG(elem.querySelector('.basicLightbox__placeholder'))
+	const img = containsIMG(elem.querySelector('.basicLightbox__placeholder'))
 
 	// Add img class to lightbox when it only contains an image
 	// This class is necessary to center the image properly
-	if (_containsIMG===true) elem.classList.add('basicLightbox--img')
+	if (img===true) elem.classList.add('basicLightbox--img')
 
-	// Bind close element
-	if (opts.closable===true) bindClose(elem.querySelector('.basicLightbox__close'), opts)
+	return elem
+
+}
+
+const show = function(elem, next) {
+
+	// Append lightbox to DOM
+	document.body.appendChild(elem)
 
 	// Wait a while to ensure that the class change triggers the animation
 	setTimeout(() => {
@@ -136,30 +87,15 @@ export const show = function(html, opts) {
 			// Show lightbox
 			elem.classList.add('basicLightbox--visible')
 
-			// Run afterShow event
-			opts.afterShow()
+			// Continue with the callback
+			return next()
 
 		})
 	}, 10)
 
-	return true
-
 }
 
-export const close = function(opts) {
-
-	// Validate options
-	opts = validate(opts)
-
-	// Run beforeClose event
-	// Stop execution when function returns false
-	if (opts.beforeClose()===false) return false
-
-	// Get the lightbox element
-	let elem = document.querySelector('.basicLightbox')
-
-	// Don't continue to hide lightbox when element not visible
-	if (visible()===false) return false
+const close = function(elem, next) {
 
 	// Hide lightbox
 	elem.classList.remove('basicLightbox--visible')
@@ -168,13 +104,13 @@ export const close = function(opts) {
 		requestAnimationFrame(() => {
 
 			// Don't continue to remove lightbox when element missing
-			if (exists()===false) return false
+			if (visible(elem)===false) return next()
 
 			// Remove lightbox from DOM
 			elem.parentElement.removeChild(elem)
 
-			// Run afterClose event
-			opts.afterClose()
+			// Continue with the callback
+			return next()
 
 		})
 	}, 410)
@@ -183,11 +119,95 @@ export const close = function(opts) {
 
 }
 
-export const init = function(elems, opts) {
+export const create = function(html, opts) {
 
-	if (typeof elems === 'string') elems = document.querySelectorAll(elems)
-	if (elems==null)               elems = document.querySelectorAll('[data-basicLightbox-show]')
+	// Validate options
+	opts = validate(opts)
 
-	Array.prototype.forEach.call(elems, (elem) => bindShow(elem, opts))
+	// Render the lightbox element
+	const elem = render(html, opts)
+
+	// Returns the lightbox element
+	const _element = () => {
+
+		return elem
+
+	}
+
+	// Check if the lightbox is attached to the DOM
+	const _visible = () => {
+
+		return visible(elem)
+
+	}
+
+	// Show the lightbox
+	const _show = (next) => {
+
+		// Run beforeShow event
+		// Stop execution when function returns false
+		if (opts.beforeShow(instance)===false) return false
+
+		// Show the lightbox
+		show(elem, () => {
+
+			// Run afterShow event
+			opts.afterShow(instance)
+
+			// Continue with the callback when available
+			if (typeof next === 'function') return next(instance)
+
+		})
+
+		return true
+
+	}
+
+	// Hide the lightbox
+	const _close = (next) => {
+
+		// Run beforeClose event
+		// Stop execution when function returns false
+		if (opts.beforeClose(instance)===false) return false
+
+		close(elem, () => {
+
+			// Run afterClose event
+			opts.afterClose(instance)
+
+			// Continue with the callback when available
+			if (typeof next === 'function') return next(instance)
+
+		})
+
+		return true
+
+	}
+
+	// Close lightbox when clicking the background
+	if (opts.closable===true) elem.onclick = function(e) {
+
+		// If e.target is not the same element as this,
+		// then the user clicked a descendant of the element
+		if (e.target!==this) return false
+
+		// Close lightbox with the instance function
+		_close()
+
+		// Prevent default event and propagation
+		stopEvent(e)
+
+	}
+
+	// Assign instance to a variable so the instance can be used
+	// elsewhere in the current function
+	const instance = {
+		element : _element,
+		visible : _visible,
+		show    : _show,
+		close   : _close
+	}
+
+	return instance
 
 }
