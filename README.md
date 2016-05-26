@@ -60,7 +60,7 @@ Include the CSS-file in the `head` and the JS-file at the end of your `body`…
 <script src="dist/basicLightbox.min.js"></script>
 ```
 
-…or skip the JS-file and use basicLightbox as module:
+…or skip the JS-file and use basicLightbox as a module:
 
 ```js
 const basicLightbox = require('basiclightbox')
