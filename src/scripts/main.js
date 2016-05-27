@@ -58,7 +58,7 @@ const render = function(html = '', opts) {
 	// Add lightbox content
 	elem.innerHTML = `
 		${ opts.beforePlaceholder }
-		<div class="basicLightbox__placeholder">
+		<div class="basicLightbox__placeholder" role="dialog">
 			${ html }
 		</div>
 		${ opts.afterPlaceholder }
