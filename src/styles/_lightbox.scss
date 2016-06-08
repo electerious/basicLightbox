@@ -21,6 +21,7 @@
 
 	// Placeholder -------------------------------------------------------------- //
 	&__placeholder {
+		max-width: 100%;
 		transform: scale(.9);
 		transition: transform $basicLightbox__duration $basicLightbox__timing;
 		z-index: 1;
