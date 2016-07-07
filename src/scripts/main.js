@@ -93,6 +93,8 @@ const show = function(elem, next) {
 		})
 	}, 10)
 
+	return true
+
 }
 
 const close = function(elem, next) {
