@@ -189,7 +189,7 @@ export const create = function(html, opts) {
 
 		// If e.target is not the same element as this,
 		// then the user clicked a descendant of the element
-		if (e.target!==this) return false
+		if (e.target!==this) return
 
 		// Close lightbox with the instance function
 		_close()
