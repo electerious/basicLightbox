@@ -98,8 +98,8 @@ const instance = basicLightbox.create(`
 
 Parameters:
 
-- `html` `{string}` Content of the lightbox.
-- `opts` `{Object | null}` An object of [options](#options).
+- `html` `{String}` Content of the lightbox.
+- `opts` `{?Object}` An object of [options](#options).
 
 ### .visible()
 
@@ -131,7 +131,7 @@ instance.show(() => console.log('lightbox now visible'))
 
 Parameters:
 
-- `cb(instance)` `{function | null}` A function that gets executed as soon as the lightbox starts to fade in.
+- `cb(instance)` `{?Function}` A function that gets executed as soon as the lightbox starts to fade in.
 
 ### .close(cb)
 
@@ -149,7 +149,7 @@ instance.close(() => console.log('lightbox not visible anymore'))
 
 Parameters:
 
-- `cb(instance)` `{function | null}` A function that gets executed as soon as the lightbox has been faded out.
+- `cb(instance)` `{?Function}` A function that gets executed as soon as the lightbox has been faded out.
 
 ### .visible()
 
