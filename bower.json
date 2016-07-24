@@ -4,7 +4,10 @@
     "Tobias Reich <tobias@electerious.com>"
   ],
   "description": "The lightest lightbox ever made.",
-  "main": "dist/basicLightbox.min.js",
+  "main": [
+    "dist/basicLightbox.min.css",
+    "dist/basicLightbox.min.js"
+  ],
   "keywords": [
     "lightbox",
     "popup",
