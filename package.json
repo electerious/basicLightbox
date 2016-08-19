@@ -23,7 +23,7 @@
     "compile": "gulp"
   },
   "license": "MIT",
-  "homepage": "http://github.com/electerious/basicLightbox",
+  "homepage": "https://github.com/electerious/basicLightbox",
   "repository": {
     "type": "git",
     "url": "https://github.com/electerious/basicLightbox.git"
