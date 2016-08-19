@@ -16,7 +16,7 @@ The lightest lightbox ever made.
 
 | Name | Description | Link |
 |:-----------|:------------|:------------|
-| Default | Includes all features. | [Demo](http://codepen.io/electerious/pen/rLBvGz) |
+| Default | Includes all features. | [Demo](https://codepen.io/electerious/pen/rLBvGz) |
 | Thumbnails | Shows a big version of a photo after clicking its thumbnail. | [Demo](demos/thumbnails.html) |
 
 ## Features
@@ -40,7 +40,7 @@ Some of these APIs are capable of being polyfilled in older browser. Check the l
 
 ## Setup
 
-We recommend to install basicLightbox using [Bower](http://bower.io/) or [npm](https://npmjs.com).
+We recommend to install basicLightbox using [Bower](https://bower.io/) or [npm](https://npmjs.com).
 
 ```sh
 bower install basicLightbox
