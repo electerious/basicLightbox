@@ -1,7 +1,7 @@
 const stopEvent = function(e) {
 
-	if (typeof e.stopPropagation === 'function') e.stopPropagation()
-	if (typeof e.preventDefault === 'function')  e.preventDefault()
+	if (typeof e.stopPropagation==='function') e.stopPropagation()
+	if (typeof e.preventDefault==='function')  e.preventDefault()
 
 }
 
@@ -11,19 +11,19 @@ const validate = function(opts = {}) {
 
 	if (opts.closable!==false) opts.closable = true
 
-	if (typeof opts.className === 'function') opts.className = opts.className()
-	if (typeof opts.className !== 'string')   opts.className = null
+	if (typeof opts.className==='function') opts.className = opts.className()
+	if (typeof opts.className!=='string')   opts.className = null
 
-	if (typeof opts.beforeShow !== 'function')  opts.beforeShow = () => {}
-	if (typeof opts.afterShow !== 'function')   opts.afterShow = () => {}
-	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
-	if (typeof opts.afterClose !== 'function')  opts.afterClose = () => {}
+	if (typeof opts.beforeShow!=='function')  opts.beforeShow = () => {}
+	if (typeof opts.afterShow!=='function')   opts.afterShow = () => {}
+	if (typeof opts.beforeClose!=='function') opts.beforeClose = () => {}
+	if (typeof opts.afterClose!=='function')  opts.afterClose = () => {}
 
-	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
-	if (typeof opts.beforePlaceholder !== 'string')   opts.beforePlaceholder = ''
+	if (typeof opts.beforePlaceholder==='function') opts.beforePlaceholder = opts.beforePlaceholder()
+	if (typeof opts.beforePlaceholder!=='string')   opts.beforePlaceholder = ''
 
-	if (typeof opts.afterPlaceholder === 'function') opts.afterPlaceholder = opts.afterPlaceholder()
-	if (typeof opts.afterPlaceholder !== 'string')   opts.afterPlaceholder = ''
+	if (typeof opts.afterPlaceholder==='function') opts.afterPlaceholder = opts.afterPlaceholder()
+	if (typeof opts.afterPlaceholder!=='string')   opts.afterPlaceholder = ''
 
 	return opts
 
@@ -157,7 +157,7 @@ export const create = function(html, opts) {
 			opts.afterShow(instance)
 
 			// Continue with the callback when available
-			if (typeof next === 'function') return next(instance)
+			if (typeof next==='function') return next(instance)
 
 		})
 
@@ -178,7 +178,7 @@ export const create = function(html, opts) {
 			opts.afterClose(instance)
 
 			// Continue with the callback when available
-			if (typeof next === 'function') return next(instance)
+			if (typeof next==='function') return next(instance)
 
 		})
 
