@@ -1,3 +1,7 @@
+/**
+ * Stops event propagation and prevents the default event action.
+ * @param {Object} e - DOM event.
+ */
 const stopEvent = function(e) {
 
 	if (typeof e.stopPropagation==='function') e.stopPropagation()
@@ -5,6 +9,11 @@ const stopEvent = function(e) {
 
 }
 
+/**
+ * Validates options and sets defaults for undefined properties.
+ * @param {?Object} opts
+ * @returns {Object} opts - Validated options.
+ */
 const validate = function(opts = {}) {
 
 	opts = Object.assign({}, opts)
@@ -29,6 +38,11 @@ const validate = function(opts = {}) {
 
 }
 
+/**
+ * Checks if a DOM element's first child is an IMG tag.
+ * @param {Node} elem
+ * @returns {Boolean} containsIMG
+ */
 const containsIMG = function(elem) {
 
 	const children = elem.children
@@ -37,6 +51,11 @@ const containsIMG = function(elem) {
 
 }
 
+/**
+ * Checks if a given or any lightbox element is visible.
+ * @param {?Node} elem
+ * @returns {Boolean} visible
+ */
 export const visible = function(elem) {
 
 	elem = elem || document.querySelector('.basicLightbox')
@@ -45,6 +64,12 @@ export const visible = function(elem) {
 
 }
 
+/**
+ * Creates a lightbox DOM element.
+ * @param {?String} html - Lightbox content.
+ * @param {Object} opts
+ * @returns {Node} elem
+ */
 const render = function(html = '', opts) {
 
 	const elem = document.createElement('div')
@@ -75,6 +100,12 @@ const render = function(html = '', opts) {
 
 }
 
+/**
+ * Shows a lightbox by appending a DOM element to the DOM.
+ * @param {Node} elem
+ * @param {Function} next - The callback that gets executed when the lightbox starts to show up.
+ * @returns {Boolean} success
+ */
 const show = function(elem, next) {
 
 	// Append lightbox to DOM
@@ -97,6 +128,12 @@ const show = function(elem, next) {
 
 }
 
+/**
+ * Closes a lightbox by fading the element out and by removing the DOM element from the DOM.
+ * @param {Node} elem
+ * @param {Function} next - The callback that gets executed when the lightbox is fully closed.
+ * @returns {Boolean} success
+ */
 const close = function(elem, next) {
 
 	// Hide lightbox
@@ -121,6 +158,12 @@ const close = function(elem, next) {
 
 }
 
+/**
+ * Creats a new instance.
+ * @param {?String} html - Lightbox content.
+ * @param {?Object} opts
+ * @returns {Object} instance
+ */
 export const create = function(html, opts) {
 
 	// Validate options
