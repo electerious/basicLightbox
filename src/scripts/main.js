@@ -194,7 +194,7 @@ export const create = function(html, opts) {
 		if (opts.beforeShow(instance)===false) return false
 
 		// Show the lightbox
-		show(elem, () => {
+		return show(elem, () => {
 
 			// Run afterShow event
 			opts.afterShow(instance)
@@ -203,8 +203,6 @@ export const create = function(html, opts) {
 			if (typeof next==='function') return next(instance)
 
 		})
-
-		return true
 
 	}
 
@@ -215,7 +213,7 @@ export const create = function(html, opts) {
 		// Stop execution when function returns false
 		if (opts.beforeClose(instance)===false) return false
 
-		close(elem, () => {
+		return close(elem, () => {
 
 			// Run afterClose event
 			opts.afterClose(instance)
@@ -224,8 +222,6 @@ export const create = function(html, opts) {
 			if (typeof next==='function') return next(instance)
 
 		})
-
-		return true
 
 	}
 
