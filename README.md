@@ -101,6 +101,10 @@ Parameters:
 - `html` `{String}` Content of the lightbox.
 - `opts` `{?Object}` An object of [options](#options).
 
+Returns:
+
+- `{Object}` The created instance.
+
 ### .visible()
 
 Returns `true` when a lightbox is visible. Also returns `true` when a lightbox is currently in the process of showing/hiding and not fully visible/hidden, yet.
@@ -110,6 +114,10 @@ Example:
 ```js
 const visible = basicLightbox.visible()
 ```
+
+Returns:
+
+- `{Boolean}` Visibility of any lightbox.
 
 ## Instance API
 
@@ -161,6 +169,10 @@ Example:
 const visible = instance.visible()
 ```
 
+Returns:
+
+- `{Boolean}` Visibility of lightbox.
+
 ### .element()
 
 Returns the Node object associated with the instance.
@@ -170,6 +182,10 @@ Example:
 ```js
 const elem = instance.element()
 ```
+
+Returns:
+
+- `{Node}` Node object associated with the instance.
 
 ## Options
 
