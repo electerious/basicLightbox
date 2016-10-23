@@ -29,14 +29,14 @@ The lightest lightbox ever made.
 
 ## Requirements
 
-basicLightbox dependents on the following browser APIs:
+basicLightbox depends on the following browser APIs:
 
 - [classList](https://dom.spec.whatwg.org/#dom-element-classlist)
 - [Pointer Events](https://www.w3.org/TR/pointerevents/)
 - [Flexible Box Layout Module](https://www.w3.org/TR/css3-flexbox/)
 - [Object.assign](http://www.ecma-international.org/ecma-262/6.0/#sec-object.assign)
 
-Some of these APIs are capable of being polyfilled in older browser. Check the linked resources above to determine if you must polyfill to achieve your desired level of browser support.
+Some of these APIs are capable of being polyfilled in older browsers. Check the linked resources above to determine if you must polyfill to achieve your desired level of browser support.
 
 ## Setup
 
@@ -50,7 +50,7 @@ bower install basicLightbox
 npm install basiclightbox
 ```
 
-Include the CSS-file in the `head` and the JS-file at the end of your `body`…
+Include the CSS-file in the `head` tag and the JS file at the end of your `body` tag…
 
 ```html
 <link rel="stylesheet" href="dist/basicLightbox.min.css">
@@ -60,7 +60,7 @@ Include the CSS-file in the `head` and the JS-file at the end of your `body`…
 <script src="dist/basicLightbox.min.js"></script>
 ```
 
-…or skip the JS-file and use basicLightbox as a module:
+…or skip the JS file and use basicLightbox as a module:
 
 ```js
 const basicLightbox = require('basiclightbox')
@@ -189,7 +189,7 @@ Returns:
 
 ## Options
 
-The option-object can include the following properties:
+The option object can include the following properties:
 
 ```js
 {
@@ -198,7 +198,7 @@ The option-object can include the following properties:
 	 */
 	closable: true,
 	/*
-	 * One or more space-separated classes to be added to the basicLightbox element.
+	 * One or more space separated classes to be added to the basicLightbox element.
 	 * Must be a string or a function which returns a string.
 	 */
 	className: null,
@@ -212,7 +212,7 @@ The option-object can include the following properties:
 	afterClose  : (instance) => {},
 	/*
 	 * String containing HTML or function which returns a string of HTML.
-	 * Will be added before or after the content-placeholder of the lightbox.
+	 * Will be added before or after the content placeholder of the lightbox.
 	 */
 	beforePlaceholder : '',
 	afterPlaceholder  : ''
