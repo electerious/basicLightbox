@@ -27,7 +27,9 @@
 		z-index: 1;
 		will-change: transform;
 
-		> img {
+		// Only when it's the only element
+		> img:first-child:last-child {
+			display: block;
 			position: absolute;
 			top: 0;
 			right: 0;
@@ -40,7 +42,9 @@
 			height: auto;
 		}
 
-		> iframe {
+		// Only when it's the only element
+		> iframe:first-child:last-child {
+			display: block;
 			margin: 0 auto;
 			max-width: 95%;
 		}
