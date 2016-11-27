@@ -53,7 +53,7 @@ bower install basicLightbox
 npm install basiclightbox
 ```
 
-Include the CSS-file in the `head` tag and the JS file at the end of your `body` tag…
+Include the CSS file in the `head` tag and the JS file at the end of your `body` tag…
 
 ```html
 <link rel="stylesheet" href="dist/basicLightbox.min.css">
