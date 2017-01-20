@@ -20,6 +20,7 @@ The lightest lightbox ever made.
 |:-----------|:------------|:------------|
 | Default | Includes all features. | [Try it on CodePen](https://codepen.io/electerious/pen/rLBvGz) |
 | Thumbnails | Shows a big version of a photo after clicking its thumbnail. | [Demo](demos/thumbnails.html) |
+| Gallery | Lightbox with navigation. | [Demo](demos/gallery.html) |
 
 ## Features
 
