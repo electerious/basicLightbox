@@ -45,8 +45,8 @@
 
 			elem.onclick = function(e) {
 
-				var src  = elem.getAttribute('data-src')
-				var html = '<img src="' + src + '">'
+				const src  = elem.getAttribute('data-src')
+				const html = '<img src="' + src + '">'
 
 				basicLightbox.create(html).show()
 

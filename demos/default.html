@@ -43,10 +43,10 @@
 
 	</style>
 
-	<img width="1400" height="900" src="//placehold.it/1400x900" data-basicLightbox data-id="0">
+	<img width="1400" height="900" src="https://placehold.it/1400x900" data-basicLightbox data-id="0">
 	<a href="#" class="button" data-show-id="0">img</a>
 
-	<iframe width="560" height="315" src="//www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen data-basicLightbox data-id="1"></iframe>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen data-basicLightbox data-id="1"></iframe>
 	<a href="#" class="button" data-show-id="1">iframe</a>
 
 	<div data-basicLightbox data-id="2">
@@ -105,10 +105,10 @@
 
 	<script>
 
-		var getTargetHTML = function(elem) {
+		const getTargetHTML = function(elem) {
 
-			var id     = elem.getAttribute('data-show-id')
-			var target = document.querySelector(`[data-id="${ id }"]`)
+			const id     = elem.getAttribute('data-show-id')
+			const target = document.querySelector(`[data-id="${ id }"]`)
 
 			return target.outerHTML
 
@@ -116,7 +116,7 @@
 
 		Array.prototype.forEach.call(document.querySelectorAll('[data-show-id]'), function(elem) {
 
-			var html = getTargetHTML(elem)
+			const html = getTargetHTML(elem)
 
 			elem.onclick = basicLightbox.create(html).show
 
@@ -124,20 +124,20 @@
 
 		document.querySelector('.button.callbacks').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
-			var instance = basicLightbox.create(html, {
-				beforeShow  : function(instance) { console.log('beforeShow', instance) },
-				afterShow   : function(instance) { console.log('afterShow', instance) },
-				beforeClose : function(instance) { console.log('beforeClose', instance) },
-				afterClose  : function(instance) { console.log('afterClose', instance) }
+			const instance = basicLightbox.create(html, {
+				beforeShow  : (instance) => console.log('beforeShow', instance),
+				afterShow   : (instance) => console.log('afterShow', instance),
+				beforeClose : (instance) => console.log('beforeClose', instance),
+				afterClose  : (instance) => console.log('afterClose', instance)
 			})
 
-			instance.show(function(instance) { console.log('finished show()', instance) })
+			instance.show((instance) => console.log('finished show()', instance))
 
-			setTimeout(function() {
+			setTimeout(() => {
 
-				instance.close(function(instance) { console.log('finished close()', instance) })
+				instance.close((instance) => console.log('finished close()', instance))
 
 			}, 3000)
 
@@ -145,17 +145,17 @@
 
 		document.querySelector('.button.blocked').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
-				beforeClose: function() { return false }
+				beforeClose: () => false
 			}).show()
 
 		}
 
 		document.querySelector('.button.invalid').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
 				closable          : null,
@@ -172,7 +172,7 @@
 
 		document.querySelector('.button.closable').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
 				closable: true
@@ -182,7 +182,7 @@
 
 		document.querySelector('.button.notclosable').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
 				closable: false
@@ -192,10 +192,10 @@
 
 		document.querySelector('.button.custom').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
-				beforePlaceholder : function() { return 'beforePlaceholder' },
+				beforePlaceholder : () => 'beforePlaceholder',
 				afterPlaceholder  : 'afterPlaceholder'
 			}).show()
 
@@ -203,7 +203,7 @@
 
 		document.querySelector('.button.classNames').onclick = function(e) {
 
-			var html = getTargetHTML(this)
+			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
 				className: 'classNames'
@@ -213,19 +213,19 @@
 
 		document.querySelector('.button.dynamic').onclick = function(e) {
 
-			var html = ''
-
-			html += '<h1>Dynamic Content</h1>'
-			html += '<p>You can set the content of the lightbox with JS.</p>'
+			const html = `
+				<h1>Dynamic Content</h1>
+				<p>You can set the content of the lightbox with JS.</p>
+			`
 
 			basicLightbox.create(html).show()
 
 		}
 
-		var openStack = function(e) {
+		const openStack = function(e) {
 
-			var html     = '<a class="button" href="#">Open another lightbox on top</a>'
-			var instance = basicLightbox.create(html)
+			const html     = '<a class="button" href="#">Open another lightbox on top</a>'
+			const instance = basicLightbox.create(html)
 
 			instance.element().querySelector('.button').onclick = openStack
 			instance.show()
