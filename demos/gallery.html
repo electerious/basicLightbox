@@ -99,7 +99,7 @@
 
 		}
 
-		Array.prototype.forEach.call(document.querySelectorAll('.thumbnail'), function(elem) {
+		document.querySelectorAll('.thumbnail').forEach(function(elem) {
 
 			elem.onclick = (e) => open(elem)
 

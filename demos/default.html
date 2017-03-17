@@ -114,7 +114,7 @@
 
 		}
 
-		Array.prototype.forEach.call(document.querySelectorAll('[data-show-id]'), function(elem) {
+		document.querySelectorAll('[data-show-id]').forEach(function(elem) {
 
 			const html = getTargetHTML(elem)
 
