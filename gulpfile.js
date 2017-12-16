@@ -1,17 +1,17 @@
 'use strict'
 
-let name  = require('./package.json').moduleName
-let gulp  = require('gulp')
+let name = require('./package.json').moduleName
+let gulp = require('gulp')
 let tasks = require('@electerious/basictasks')(gulp, name)
 
 const scripts = tasks.scripts({
-	from : './src/scripts/main.js',
-	to   : './dist'
+	from: './src/scripts/main.js',
+	to: './dist'
 })
 
 const styles = tasks.styles({
-	from : './src/styles/main.scss',
-	to   : './dist'
+	from: './src/styles/main.scss',
+	to: './dist'
 })
 
 const watch = function() {
