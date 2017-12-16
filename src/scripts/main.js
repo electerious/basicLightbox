@@ -5,7 +5,7 @@
 const stopEvent = function(e) {
 
 	if (typeof e.stopPropagation==='function') e.stopPropagation()
-	if (typeof e.preventDefault==='function')  e.preventDefault()
+	if (typeof e.preventDefault==='function') e.preventDefault()
 
 }
 
@@ -21,18 +21,18 @@ const validate = function(opts = {}) {
 	if (opts.closable!==false) opts.closable = true
 
 	if (typeof opts.className==='function') opts.className = opts.className()
-	if (typeof opts.className!=='string')   opts.className = null
+	if (typeof opts.className!=='string') opts.className = null
 
-	if (typeof opts.beforeShow!=='function')  opts.beforeShow = () => {}
-	if (typeof opts.afterShow!=='function')   opts.afterShow = () => {}
+	if (typeof opts.beforeShow!=='function') opts.beforeShow = () => {}
+	if (typeof opts.afterShow!=='function') opts.afterShow = () => {}
 	if (typeof opts.beforeClose!=='function') opts.beforeClose = () => {}
-	if (typeof opts.afterClose!=='function')  opts.afterClose = () => {}
+	if (typeof opts.afterClose!=='function') opts.afterClose = () => {}
 
 	if (typeof opts.beforePlaceholder==='function') opts.beforePlaceholder = opts.beforePlaceholder()
-	if (typeof opts.beforePlaceholder!=='string')   opts.beforePlaceholder = ''
+	if (typeof opts.beforePlaceholder!=='string') opts.beforePlaceholder = ''
 
 	if (typeof opts.afterPlaceholder==='function') opts.afterPlaceholder = opts.afterPlaceholder()
-	if (typeof opts.afterPlaceholder!=='string')   opts.afterPlaceholder = ''
+	if (typeof opts.afterPlaceholder!=='string') opts.afterPlaceholder = ''
 
 	return opts
 
@@ -97,8 +97,8 @@ const render = function(html = '', opts) {
 	const video = containsTag(placeholder, 'VIDEO')
 	const iframe = containsTag(placeholder, 'IFRAME')
 
-	// Add special treatment class when it only contains an image, a video or iframe
-	// This class is necessary to center the image, video or iframe
+	// Add special treatment class when it only contains an image, a video or iframe.
+	// This class is necessary to center the image, video or iframe.
 	if (img===true) elem.classList.add('basicLightbox--img')
 	if (video===true) elem.classList.add('basicLightbox--video')
 	if (iframe===true) elem.classList.add('basicLightbox--iframe')
@@ -196,8 +196,7 @@ export const create = function(html, opts) {
 	// Show the lightbox
 	const _show = (next) => {
 
-		// Run beforeShow event
-		// Stop execution when function returns false
+		// Run beforeShow event and stop execution when function returns false
 		if (opts.beforeShow(instance)===false) return false
 
 		// Show the lightbox
@@ -216,8 +215,7 @@ export const create = function(html, opts) {
 	// Hide the lightbox
 	const _close = (next) => {
 
-		// Run beforeClose event
-		// Stop execution when function returns false
+		// Run beforeClose event and stop execution when function returns false
 		if (opts.beforeClose(instance)===false) return false
 
 		return close(elem, () => {
@@ -236,7 +234,7 @@ export const create = function(html, opts) {
 	if (opts.closable===true) elem.onclick = function(e) {
 
 		// If e.target is not the same element as this,
-		// then the user clicked a descendant of the element
+		// then the user clicked a descendant of the element.
 		if (e.target!==this) return
 
 		// Close lightbox with the instance function
@@ -248,12 +246,12 @@ export const create = function(html, opts) {
 	}
 
 	// Assign instance to a variable so the instance can be used
-	// elsewhere in the current function
+	// elsewhere in the current function.
 	const instance = {
-		element : _element,
-		visible : _visible,
-		show    : _show,
-		close   : _close
+		element: _element,
+		visible: _visible,
+		show: _show,
+		close: _close
 	}
 
 	return instance

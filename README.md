@@ -210,15 +210,26 @@ The option object can include the following properties:
 	 * Callback functions.
 	 * Returning false will stop the caller function and prevent the lightbox from showing or closing.
 	 */
-	beforeShow  : (instance) => {},
-	afterShow   : (instance) => {},
-	beforeClose : (instance) => {},
-	afterClose  : (instance) => {},
+	beforeShow: (instance) => {},
+	afterShow: (instance) => {},
+	beforeClose: (instance) => {},
+	afterClose: (instance) => {},
 	/*
 	 * String containing HTML or function which returns a string of HTML.
 	 * Will be added before or after the content placeholder of the lightbox.
 	 */
-	beforePlaceholder : '',
-	afterPlaceholder  : ''
+	beforePlaceholder: '',
+	afterPlaceholder: ''
 }
+```
+
+Import `src/styles/main.scss` directly to customize the look of basicLightbox:
+
+```scss
+$basicLightbox__background: rgba(0, 0, 0, .8); // Background color
+$basicLightbox__zIndex: 1000; // Stack order
+$basicLightbox__duration: .4s; // Transition duration
+$basicLightbox__timing: ease; // Transition timing
+
+@import 'src/styles/main';
 ```

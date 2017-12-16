@@ -31,9 +31,6 @@
 			color: #fff;
 			text-decoration: none;
 			border-radius: 3px;
-			-moz-user-select: none;
-			-webkit-user-select: none;
-			-ms-user-select: none;
 			user-select: none;
 		}
 
@@ -112,7 +109,7 @@
 
 		const getTargetHTML = function(elem) {
 
-			const id     = elem.getAttribute('data-show-id')
+			const id = elem.getAttribute('data-show-id')
 			const target = document.querySelector(`[data-id="${ id }"]`)
 
 			return target.outerHTML
@@ -132,10 +129,10 @@
 			const html = getTargetHTML(this)
 
 			const instance = basicLightbox.create(html, {
-				beforeShow  : (instance) => console.log('beforeShow', instance),
-				afterShow   : (instance) => console.log('afterShow', instance),
-				beforeClose : (instance) => console.log('beforeClose', instance),
-				afterClose  : (instance) => console.log('afterClose', instance)
+				beforeShow: (instance) => console.log('beforeShow', instance),
+				afterShow: (instance) => console.log('afterShow', instance),
+				beforeClose: (instance) => console.log('beforeClose', instance),
+				afterClose: (instance) => console.log('afterClose', instance)
 			})
 
 			instance.show((instance) => console.log('finished show()', instance))
@@ -163,14 +160,14 @@
 			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
-				closable          : null,
-				className         : null,
-				beforeShow        : null,
-				afterShow         : null,
-				beforeClose       : null,
-				afterClose        : null,
-				beforePlaceholder : null,
-				afterPlaceholder  : null
+				closable: null,
+				className: null,
+				beforeShow: null,
+				afterShow: null,
+				beforeClose: null,
+				afterClose: null,
+				beforePlaceholder: null,
+				afterPlaceholder: null
 			}).show()
 
 		}
@@ -200,8 +197,8 @@
 			const html = getTargetHTML(this)
 
 			basicLightbox.create(html, {
-				beforePlaceholder : () => 'beforePlaceholder',
-				afterPlaceholder  : 'afterPlaceholder'
+				beforePlaceholder: () => 'beforePlaceholder',
+				afterPlaceholder: 'afterPlaceholder'
 			}).show()
 
 		}
@@ -229,7 +226,7 @@
 
 		const openStack = function(e) {
 
-			const html     = '<a class="button" href="#">Open another lightbox on top</a>'
+			const html = '<a class="button" href="#">Open another lightbox on top</a>'
 			const instance = basicLightbox.create(html)
 
 			instance.element().querySelector('.button').onclick = openStack

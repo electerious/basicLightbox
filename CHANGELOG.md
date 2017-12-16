@@ -9,10 +9,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### New
 
 - Support for `video` tag
+- Documentation of SASS variables
 
 ### Changed
 
 - Improved responsiveness when used with `iframe` tag
+- Syntax of JS and SCSS files
 
 ## [3.0.4] - 2017-08-08
 
