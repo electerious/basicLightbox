@@ -39,15 +39,16 @@ const validate = function(opts = {}) {
 }
 
 /**
- * Checks if a DOM element's first child is an IMG tag.
+ * Checks if a DOM element's first child has a specific tag.
  * @param {Node} elem
- * @returns {Boolean} containsIMG
+ * @param {String} tag
+ * @returns {Boolean} containsTag
  */
-const containsIMG = function(elem) {
+const containsTag = function(elem, tag) {
 
 	const children = elem.children
 
-	return (children.length===1 && children[0].tagName==='IMG' ? true : false)
+	return (children.length===1 && children[0].tagName===tag ? true : false)
 
 }
 
@@ -89,12 +90,18 @@ const render = function(html = '', opts) {
 		${ opts.afterPlaceholder }
 	`
 
-	// Check if placeholder contains only an image
-	const img = containsIMG(elem.querySelector('.basicLightbox__placeholder'))
+	const placeholder = elem.querySelector('.basicLightbox__placeholder')
 
-	// Add img class to lightbox when it only contains an image
-	// This class is necessary to center the image properly
+	// Check if placeholder contains a tag that requires a special treatment
+	const img = containsTag(placeholder, 'IMG')
+	const video = containsTag(placeholder, 'VIDEO')
+	const iframe = containsTag(placeholder, 'IFRAME')
+
+	// Add special treatment class when it only contains an image, a video or iframe
+	// This class is necessary to center the image, video or iframe
 	if (img===true) elem.classList.add('basicLightbox--img')
+	if (video===true) elem.classList.add('basicLightbox--video')
+	if (iframe===true) elem.classList.add('basicLightbox--iframe')
 
 	return elem
 

@@ -49,53 +49,58 @@
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen data-basicLightbox data-id="1"></iframe>
 	<a href="#" class="button" data-show-id="1">iframe</a>
 
-	<div data-basicLightbox data-id="2">
+	<video controls data-basicLightbox data-id="2">
+		<source src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" type="video/mp4">
+	</video>
+	<a href="#" class="button" data-show-id="2">video</a>
+
+	<div data-basicLightbox data-id="3">
 		<h1>DIV</h1>
 		<p>I'm a div inside a lightbox.</p>
 	</div>
-	<a href="#" class="button" data-show-id="2">div</a>
+	<a href="#" class="button" data-show-id="3">div</a>
 
-	<div data-basicLightbox data-id="3">
+	<div data-basicLightbox data-id="4">
 		<h1>Callbacks</h1>
 		<p>Take a look at the console of your browser.<br>This lightbox will close automaticly to demonstrate the close-callback.</p>
 	</div>
-	<a href="#" class="button callbacks" data-show-id="3">callbacks</a>
+	<a href="#" class="button callbacks" data-show-id="4">callbacks</a>
 
-	<div data-basicLightbox data-id="4">
+	<div data-basicLightbox data-id="5">
 		<h1>Blocked</h1>
 		<p>It's not possible to close this lightbox,<br>because the beforeClose function returns false.</p>
 	</div>
-	<a href="#" class="button blocked" data-show-id="4">blocked</a>
+	<a href="#" class="button blocked" data-show-id="5">blocked</a>
 
-	<div data-basicLightbox data-id="5">
+	<div data-basicLightbox data-id="6">
 		<h1>Invalid</h1>
 		<p>No callback should fire, because non of them is a function.<br>No HTML should be appended, because non of them is a function or string.</p>
 	</div>
-	<a href="#" class="button invalid" data-show-id="5">invalid</a>
+	<a href="#" class="button invalid" data-show-id="6">invalid</a>
 
-	<div data-basicLightbox data-id="6">
+	<div data-basicLightbox data-id="7">
 		<h1>Closable</h1>
 		<p>It's possible to close this lightbox with a click (default).</p>
 	</div>
-	<a href="#" class="button closable" data-show-id="6">closable</a>
+	<a href="#" class="button closable" data-show-id="7">closable</a>
 
-	<div data-basicLightbox data-id="7">
+	<div data-basicLightbox data-id="8">
 		<h1>Not closable</h1>
 		<p>It's not possible to close this lightbox with a click.</p>
 	</div>
-	<a href="#" class="button notclosable" data-show-id="7">not closable</a>
+	<a href="#" class="button notclosable" data-show-id="8">not closable</a>
 
-	<div data-basicLightbox data-id="8">
+	<div data-basicLightbox data-id="9">
 		<h1>Custom HTML</h1>
 		<p>You can add custom HTML before and after the HTML placeholder element.</p>
 	</div>
-	<a href="#" class="button custom" data-show-id="8">custom</a>
+	<a href="#" class="button custom" data-show-id="9">custom</a>
 
-	<div data-basicLightbox data-id="9">
+	<div data-basicLightbox data-id="10">
 		<h1>Custom classNames</h1>
 		<p>You can add custom classNames to the lightbox element.</p>
 	</div>
-	<a href="#" class="button classNames" data-show-id="9">classNames</a>
+	<a href="#" class="button classNames" data-show-id="10">classNames</a>
 
 	<a href="#" class="button dynamic">dynamic</a>
 
