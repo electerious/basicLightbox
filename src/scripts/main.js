@@ -115,17 +115,14 @@ const render = function(html = '', opts) {
  */
 const show = function(elem, next) {
 
-	// Append lightbox to DOM
 	document.body.appendChild(elem)
 
 	// Wait a while to ensure that the class change triggers the animation
 	setTimeout(() => {
 		requestAnimationFrame(() => {
 
-			// Show lightbox
 			elem.classList.add('basicLightbox--visible')
 
-			// Continue with the callback
 			return next()
 
 		})
@@ -143,22 +140,17 @@ const show = function(elem, next) {
  */
 const close = function(elem, next) {
 
-	// Hide lightbox
 	elem.classList.remove('basicLightbox--visible')
 
 	setTimeout(() => {
-		requestAnimationFrame(() => {
 
-			// Don't continue to remove lightbox when element missing
-			if (visible(elem)===false) return next()
+		// Don't continue to remove lightbox when element missing
+		if (visible(elem)===false) return next()
 
-			// Remove lightbox from DOM
-			elem.parentElement.removeChild(elem)
+		elem.parentElement.removeChild(elem)
 
-			// Continue with the callback
-			return next()
+		return next()
 
-		})
 	}, 410)
 
 	return true
