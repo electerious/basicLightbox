@@ -4,8 +4,8 @@
  */
 const stopEvent = function(e) {
 
-	if (typeof e.stopPropagation==='function') e.stopPropagation()
-	if (typeof e.preventDefault==='function') e.preventDefault()
+	if (typeof e.stopPropagation === 'function') e.stopPropagation()
+	if (typeof e.preventDefault === 'function') e.preventDefault()
 
 }
 
@@ -18,21 +18,21 @@ const validate = function(opts = {}) {
 
 	opts = Object.assign({}, opts)
 
-	if (opts.closable!==false) opts.closable = true
+	if (opts.closable !== false) opts.closable = true
 
-	if (typeof opts.className==='function') opts.className = opts.className()
-	if (typeof opts.className!=='string') opts.className = null
+	if (typeof opts.className === 'function') opts.className = opts.className()
+	if (typeof opts.className !== 'string') opts.className = null
 
-	if (typeof opts.beforeShow!=='function') opts.beforeShow = () => {}
-	if (typeof opts.afterShow!=='function') opts.afterShow = () => {}
-	if (typeof opts.beforeClose!=='function') opts.beforeClose = () => {}
-	if (typeof opts.afterClose!=='function') opts.afterClose = () => {}
+	if (typeof opts.beforeShow !== 'function') opts.beforeShow = () => {}
+	if (typeof opts.afterShow !== 'function') opts.afterShow = () => {}
+	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
+	if (typeof opts.afterClose !== 'function') opts.afterClose = () => {}
 
-	if (typeof opts.beforePlaceholder==='function') opts.beforePlaceholder = opts.beforePlaceholder()
-	if (typeof opts.beforePlaceholder!=='string') opts.beforePlaceholder = ''
+	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
+	if (typeof opts.beforePlaceholder !== 'string') opts.beforePlaceholder = ''
 
-	if (typeof opts.afterPlaceholder==='function') opts.afterPlaceholder = opts.afterPlaceholder()
-	if (typeof opts.afterPlaceholder!=='string') opts.afterPlaceholder = ''
+	if (typeof opts.afterPlaceholder === 'function') opts.afterPlaceholder = opts.afterPlaceholder()
+	if (typeof opts.afterPlaceholder !== 'string') opts.afterPlaceholder = ''
 
 	return opts
 
@@ -48,7 +48,7 @@ const containsTag = function(elem, tag) {
 
 	const children = elem.children
 
-	return (children.length===1 && children[0].tagName===tag ? true : false)
+	return (children.length === 1 && children[0].tagName === tag)
 
 }
 
@@ -61,7 +61,7 @@ export const visible = function(elem) {
 
 	elem = elem || document.querySelector('.basicLightbox')
 
-	return (elem!=null && elem.ownerDocument.body.contains(elem)===true ? true : false)
+	return (elem != null && elem.ownerDocument.body.contains(elem) === true)
 
 }
 
@@ -79,7 +79,7 @@ const render = function(html = '', opts) {
 	elem.classList.add('basicLightbox')
 
 	// Add a custom class when available
-	if (opts.className!=null) elem.classList.add(opts.className)
+	if (opts.className != null) elem.classList.add(opts.className)
 
 	// Add lightbox content
 	elem.innerHTML = `
@@ -99,9 +99,9 @@ const render = function(html = '', opts) {
 
 	// Add special treatment class when it only contains an image, a video or iframe.
 	// This class is necessary to center the image, video or iframe.
-	if (img===true) elem.classList.add('basicLightbox--img')
-	if (video===true) elem.classList.add('basicLightbox--video')
-	if (iframe===true) elem.classList.add('basicLightbox--iframe')
+	if (img === true) elem.classList.add('basicLightbox--img')
+	if (video === true) elem.classList.add('basicLightbox--video')
+	if (iframe === true) elem.classList.add('basicLightbox--iframe')
 
 	return elem
 
@@ -145,7 +145,7 @@ const close = function(elem, next) {
 	setTimeout(() => {
 
 		// Don't continue to remove lightbox when element missing
-		if (visible(elem)===false) return next()
+		if (visible(elem) === false) return next()
 
 		elem.parentElement.removeChild(elem)
 
@@ -189,7 +189,7 @@ export const create = function(html, opts) {
 	const _show = (next) => {
 
 		// Run beforeShow event and stop execution when function returns false
-		if (opts.beforeShow(instance)===false) return false
+		if (opts.beforeShow(instance) === false) return false
 
 		// Show the lightbox
 		return show(elem, () => {
@@ -198,7 +198,7 @@ export const create = function(html, opts) {
 			opts.afterShow(instance)
 
 			// Continue with the callback when available
-			if (typeof next==='function') return next(instance)
+			if (typeof next === 'function') return next(instance)
 
 		})
 
@@ -208,7 +208,7 @@ export const create = function(html, opts) {
 	const _close = (next) => {
 
 		// Run beforeClose event and stop execution when function returns false
-		if (opts.beforeClose(instance)===false) return false
+		if (opts.beforeClose(instance) === false) return false
 
 		return close(elem, () => {
 
@@ -216,18 +216,18 @@ export const create = function(html, opts) {
 			opts.afterClose(instance)
 
 			// Continue with the callback when available
-			if (typeof next==='function') return next(instance)
+			if (typeof next === 'function') return next(instance)
 
 		})
 
 	}
 
 	// Close lightbox when clicking the background
-	if (opts.closable===true) elem.onclick = function(e) {
+	if (opts.closable === true) elem.onclick = function(e) {
 
 		// If e.target is not the same element as this,
 		// then the user clicked a descendant of the element.
-		if (e.target!==this) return
+		if (e.target !== this) return
 
 		// Close lightbox with the instance function
 		_close()
@@ -243,7 +243,7 @@ export const create = function(html, opts) {
 		element: _element,
 		visible: _visible,
 		show: _show,
-		close: _close
+		close: _close,
 	}
 
 	return instance
