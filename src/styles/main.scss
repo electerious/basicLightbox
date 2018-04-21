@@ -46,6 +46,11 @@ $basicLightbox__timing: ease !default;
 			max-height: 95%;
 		}
 
+		> video:first-child:last-child,
+		> iframe:first-child:last-child {
+			pointer-events: auto;
+		}
+
 		> img:first-child:last-child,
 		> video:first-child:last-child {
 			width: auto;
