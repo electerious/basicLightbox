@@ -219,7 +219,7 @@ The option object can include the following properties:
 	 * Will be added before or after the content placeholder of the lightbox.
 	 */
 	beforePlaceholder: '',
-	afterPlaceholder: ''
+	afterPlaceholder: '',
 }
 ```
 
