@@ -243,7 +243,7 @@ export const create = function(html, opts) {
 		element: _element,
 		visible: _visible,
 		show: _show,
-		close: _close,
+		close: _close
 	}
 
 	return instance
