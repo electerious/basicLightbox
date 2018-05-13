@@ -71,7 +71,7 @@ export const visible = function(elem) {
  * @param {Object} opts
  * @returns {Node} elem
  */
-const render = function(html = '', opts) {
+const makeLightbox = function(html = '', opts) {
 
 	const elem = document.createElement('div')
 
@@ -82,20 +82,22 @@ const render = function(html = '', opts) {
 	if (opts.className != null) elem.classList.add(opts.className)
 
 	// Add lightbox content
-	elem.innerHTML = `
-		${ opts.beforePlaceholder }
-		<div class="basicLightbox__placeholder" role="dialog">
-			${ html }
-		</div>
-		${ opts.afterPlaceholder }
-	`
+	const content = document.createElement('div')
+	content.classList.add('basicLightbox__placeholder')
+	content.role = "dialog"
 
-	const placeholder = elem.querySelector('.basicLightbox__placeholder')
+	content.appendChild(...makeElements(html))
+
+	elem.appendChild(
+		...makeElements(opts.beforePlaceholder),
+		content,
+		...makeElements(opts.afterPlaceholder)
+	)
 
 	// Check if placeholder contains a tag that requires a special treatment
-	const img = containsTag(placeholder, 'IMG')
-	const video = containsTag(placeholder, 'VIDEO')
-	const iframe = containsTag(placeholder, 'IFRAME')
+	const img = containsTag(content, 'IMG')
+	const video = containsTag(content, 'VIDEO')
+	const iframe = containsTag(content, 'IFRAME')
 
 	// Add special treatment class when it only contains an image, a video or iframe.
 	// This class is necessary to center the image, video or iframe.
@@ -105,6 +107,21 @@ const render = function(html = '', opts) {
 
 	return elem
 
+}
+
+
+/**
+ * Coerces the contents to DOM nodes depending on the input's type.
+ * @param {String,Node} input
+ * @returns {Array}
+ */
+const makeElements = function (input) {
+	if (typeof input === 'string') {
+		// TODO where would put a DOMParser instance as module constant?
+		return new DOMParser().parseFromString(input, "text/html").body.childNodes
+	}
+	if (input instanceof Element) { return [input] }
+	throw "Invalid content type"
 }
 
 /**
@@ -158,7 +175,7 @@ const close = function(elem, next) {
 }
 
 /**
- * Creats a new instance.
+ * Creates a new instance.
  * @param {?String} html - Lightbox content.
  * @param {?Object} opts
  * @returns {Object} instance
@@ -169,7 +186,7 @@ export const create = function(html, opts) {
 	opts = validate(opts)
 
 	// Render the lightbox element
-	const elem = render(html, opts)
+	const elem = makeLightbox(html, opts)
 
 	// Returns the lightbox element
 	const _element = () => {

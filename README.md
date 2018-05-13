@@ -74,11 +74,12 @@ const basicLightbox = require('basiclightbox')
 
 ### .create(html, opts)
 
-Creates a new basicLightbox instance.
+Creates a new basicLightbox instance. `html` can be provided either as html string or a Node object.
+(The same applies to `opts.beforePlaceholder` and `opts.afterPlaceholder`.)
 
-Be sure to assign your instance to a variable. Using your instance, you can…
+Be sure to assign the returned instance to a variable. Using your instance, you can…
 
-* …show and hide the lightbox.
+* …show and close the lightbox.
 * …check if the the lightbox is visible.
 * …modify the content of the lightbox.
 
