@@ -79,7 +79,7 @@ const render = function(html = '', opts) {
 	elem.classList.add('basicLightbox')
 
 	// Add a custom class when available
-	if (opts.className != null) elem.classList.add(opts.className)
+	if (opts.className != null) elem.classList.add(...opts.className.split(' '))
 
 	// Add lightbox content
 	elem.innerHTML = `
