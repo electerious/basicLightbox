@@ -20,18 +20,14 @@ const validate = function(opts = {}) {
 
 	if (opts.closable !== false) opts.closable = true
 
-	if (typeof opts.className === 'function') opts.className = opts.className()
-	if (typeof opts.className !== 'string') opts.className = null
+	if (typeof opts.className !== 'string') opts.className = ''
 
 	if (typeof opts.beforeShow !== 'function') opts.beforeShow = () => {}
 	if (typeof opts.afterShow !== 'function') opts.afterShow = () => {}
 	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
 	if (typeof opts.afterClose !== 'function') opts.afterClose = () => {}
 
-	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
 	if (typeof opts.beforePlaceholder !== 'string') opts.beforePlaceholder = ''
-
-	if (typeof opts.afterPlaceholder === 'function') opts.afterPlaceholder = opts.afterPlaceholder()
 	if (typeof opts.afterPlaceholder !== 'string') opts.afterPlaceholder = ''
 
 	return opts
@@ -79,7 +75,7 @@ const render = function(html = '', opts) {
 	elem.classList.add('basicLightbox')
 
 	// Add a custom class when available
-	if (opts.className != null) elem.classList.add(...opts.className.split(' '))
+	if (opts.className !== '') elem.classList.add(...opts.className.split(' '))
 
 	// Add lightbox content
 	elem.innerHTML = `
