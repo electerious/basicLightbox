@@ -214,12 +214,7 @@ The option object can include the following properties:
 	 * Function that gets executed before the lightbox closes.
 	 * Returning false will prevent the lightbox from closing.
 	 */
-	onClose: (instance) => {},
-	/*
-	 * HTML that will be added before or after the content placeholder of the lightbox.
-	 */
-	beforePlaceholder: '',
-	afterPlaceholder: ''
+	onClose: (instance) => {}
 }
 ```
 

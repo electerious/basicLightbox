@@ -22,15 +22,11 @@ const validate = function(opts = {}) {
 	if (opts.className == null) opts.className = ''
 	if (opts.onShow == null) opts.onShow = () => {}
 	if (opts.onClose == null) opts.onClose = () => {}
-	if (opts.beforePlaceholder == null) opts.beforePlaceholder = ''
-	if (opts.afterPlaceholder == null) opts.afterPlaceholder = ''
 
 	if (typeof opts.closable !== 'boolean') throw new Error('Property `closable` must be a boolean')
 	if (typeof opts.className !== 'string') throw new Error('Property `className` must be a string')
 	if (typeof opts.onShow !== 'function') throw new Error('Property `onShow` must be a function')
 	if (typeof opts.onClose !== 'function') throw new Error('Property `onClose` must be a function')
-	if (typeof opts.beforePlaceholder !== 'string') throw new Error('Property `beforePlaceholder` must be a string')
-	if (typeof opts.afterPlaceholder !== 'string') throw new Error('Property `afterPlaceholder` must be a string')
 
 	return opts
 
@@ -81,11 +77,9 @@ const render = function(html = '', opts) {
 
 	// Add lightbox content
 	elem.innerHTML = `
-		${ opts.beforePlaceholder }
 		<div class="basicLightbox__placeholder" role="dialog">
 			${ html }
 		</div>
-		${ opts.afterPlaceholder }
 	`
 
 	const placeholder = elem.querySelector('.basicLightbox__placeholder')
