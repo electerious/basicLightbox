@@ -1,15 +1,4 @@
 /**
- * Stops event propagation and prevents the default event action.
- * @param {Object} e - DOM event.
- */
-const stopEvent = function(e) {
-
-	if (typeof e.stopPropagation === 'function') e.stopPropagation()
-	if (typeof e.preventDefault === 'function') e.preventDefault()
-
-}
-
-/**
  * Validates options and sets defaults for undefined properties.
  * @param {?Object} opts
  * @returns {Object} opts - Validated options.
@@ -209,19 +198,16 @@ export const create = function(html, opts) {
 	}
 
 	// Close lightbox when clicking the background
-	if (opts.closable === true) elem.onclick = function(e) {
+	if (opts.closable === true) elem.addEventListener('click', (e) => {
 
-		// If e.target is not the same element as this,
+		// If e.target is not the same element as elem,
 		// then the user clicked a descendant of the element.
-		if (e.target !== this) return
+		if (e.target !== elem) return
 
 		// Close lightbox with the instance function
 		_close()
 
-		// Prevent default event and propagation
-		stopEvent(e)
-
-	}
+	})
 
 	// Assign instance to a variable so the instance can be used
 	// elsewhere in the current function.
