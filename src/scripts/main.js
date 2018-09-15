@@ -18,17 +18,19 @@ const validate = function(opts = {}) {
 
 	opts = Object.assign({}, opts)
 
-	if (opts.closable !== false) opts.closable = true
+	if (opts.closable == null) opts.closable = true
+	if (opts.className == null) opts.className = ''
+	if (opts.onShow == null) opts.onShow = () => {}
+	if (opts.onClose == null) opts.onClose = () => {}
+	if (opts.beforePlaceholder == null) opts.beforePlaceholder = ''
+	if (opts.afterPlaceholder == null) opts.afterPlaceholder = ''
 
-	if (typeof opts.className !== 'string') opts.className = ''
-
-	if (typeof opts.beforeShow !== 'function') opts.beforeShow = () => {}
-	if (typeof opts.afterShow !== 'function') opts.afterShow = () => {}
-	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
-	if (typeof opts.afterClose !== 'function') opts.afterClose = () => {}
-
-	if (typeof opts.beforePlaceholder !== 'string') opts.beforePlaceholder = ''
-	if (typeof opts.afterPlaceholder !== 'string') opts.afterPlaceholder = ''
+	if (typeof opts.closable !== 'boolean') throw new Error('Property `closable` must be a boolean')
+	if (typeof opts.className !== 'string') throw new Error('Property `className` must be a string')
+	if (typeof opts.onShow !== 'function') throw new Error('Property `onShow` must be a function')
+	if (typeof opts.onClose !== 'function') throw new Error('Property `onClose` must be a function')
+	if (typeof opts.beforePlaceholder !== 'string') throw new Error('Property `beforePlaceholder` must be a string')
+	if (typeof opts.afterPlaceholder !== 'string') throw new Error('Property `afterPlaceholder` must be a string')
 
 	return opts
 
@@ -184,14 +186,11 @@ export const create = function(html, opts) {
 	// Show the lightbox
 	const _show = (next) => {
 
-		// Run beforeShow event and stop execution when function returns false
-		if (opts.beforeShow(instance) === false) return false
+		// Run onShow callback and stop execution when function returns false
+		if (opts.onShow(instance) === false) return false
 
 		// Show the lightbox
 		return show(elem, () => {
-
-			// Run afterShow event
-			opts.afterShow(instance)
 
 			// Continue with the callback when available
 			if (typeof next === 'function') return next(instance)
@@ -203,13 +202,10 @@ export const create = function(html, opts) {
 	// Hide the lightbox
 	const _close = (next) => {
 
-		// Run beforeClose event and stop execution when function returns false
-		if (opts.beforeClose(instance) === false) return false
+		// Run onClose callback and stop execution when function returns false
+		if (opts.onClose(instance) === false) return false
 
 		return close(elem, () => {
-
-			// Run afterClose event
-			opts.afterClose(instance)
 
 			// Continue with the callback when available
 			if (typeof next === 'function') return next(instance)

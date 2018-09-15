@@ -206,13 +206,15 @@ The option object can include the following properties:
 	 */
 	className: '',
 	/*
-	 * Callback functions.
-	 * Returning false will stop the caller function and prevent the lightbox from showing or closing.
+	 * Function that gets executed before the lightbox will be shown.
+	 * Returning false will prevent the lightbox from showing.
 	 */
-	beforeShow: (instance) => {},
-	afterShow: (instance) => {},
-	beforeClose: (instance) => {},
-	afterClose: (instance) => {},
+	onShow: (instance) => {},
+	/*
+	 * Function that gets executed before the lightbox closes.
+	 * Returning false will prevent the lightbox from closing.
+	 */
+	onClose: (instance) => {},
 	/*
 	 * HTML that will be added before or after the content placeholder of the lightbox.
 	 */
