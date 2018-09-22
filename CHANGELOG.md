@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### New
 
-- Allow Node elements in `.create()` (#15, #17)
+- Node elements and templates in `.create()` (#15, #17)
 - `onShow` and `onClose` callbacks
 - Streamlined API with less options to make basicLightbox easier to use
 
