@@ -66,6 +66,10 @@ Include the CSS file in the `head` tag and the JS file at the end of your `body`
 const basicLightbox = require('basiclightbox')
 ```
 
+```js
+import * as basicLightbox from 'basiclightbox'
+```
+
 ## API
 
 ### .create(html, opts)
