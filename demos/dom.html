@@ -43,17 +43,35 @@
 
 	</style>
 
-	<button class="original">original</button>
+	<div id="html" hidden>
+		<h1>DOM element/node</h1>
+		<p>DOM element/node has been moved into the lightbox.</p>
+	</div>
 
-	<button class="modified">modified</button>
+	<div id="image" hidden>
+		<img width="1400" height="900" src="https://placehold.it/1400x900">
+	</div>
+
+	<template id="template">
+		<h1>HTML &lt;template&gt; Tag</h1>
+		<p>The template element holds HTML code without displaying it.<br>Doesn't work in older browsers.</p>
+	</template>
+
+	<button class="html">html</button>
+	<button class="image">image</button>
+	<button class="template">template</button>
 
 	<script src="../dist/basicLightbox.min.js"></script>
 
 	<script>
 
-		document.querySelector('button.original').onclick = originalInstance.show
+		const htmlInstance = basicLightbox.create(document.querySelector('#html'))
+		const imageInstance = basicLightbox.create(document.querySelector('#image'))
+		const templateInstance = basicLightbox.create(document.querySelector('#template'))
 
-		document.querySelector('button.modified').onclick = modifiedInstance.show
+		document.querySelector('button.html').onclick = htmlInstance.show
+		document.querySelector('button.image').onclick = imageInstance.show
+		document.querySelector('button.template').onclick = templateInstance.show
 
 	</script>
 

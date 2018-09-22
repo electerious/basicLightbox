@@ -16,21 +16,36 @@ const toElement = function(html, children = false) {
 
 /**
  * Validates and converts content.
- * @param {Node|String|Array} content
+ * @param {Node|String} content
  * @returns {Array} content - Validated content.
  */
 const validateContent = function(content) {
 
-	// Convert string to an array of elements
-	if (typeof content === 'string') content = Array.from(toElement(content, true))
+	const isString = typeof content === 'string'
+	const isHTMLElement = content instanceof HTMLElement === true
 
-	// Convert element to an array of elements
-	if (content instanceof HTMLElement === true) content = [ content ]
+	if (isString === false && isHTMLElement === false) {
 
-	// Check if content is an array
-	if (Array.isArray(content) === false) throw new Error('Content must be a DOM element/node or string')
+		throw new Error('Content must be a DOM element/node or string')
 
-	return content
+	}
+
+	if (isString === true) {
+
+		// String
+		return Array.from(toElement(content, true))
+
+	} else if (content.tagName === 'TEMPLATE') {
+
+		// Template
+		return [ content.content.cloneNode(true) ]
+
+	} else {
+
+		// HTMLElement
+		return Array.from(content.children)
+
+	}
 
 }
 
@@ -170,7 +185,7 @@ const close = function(elem, next) {
 
 /**
  * Creats a new instance.
- * @param {Node|String|Array} content
+ * @param {Node|String} content
  * @param {?Object} opts
  * @returns {Object} instance
  */
