@@ -72,7 +72,7 @@ import * as basicLightbox from 'basiclightbox'
 
 ## API
 
-### .create(html, opts)
+### .create(content, opts)
 
 Creates a new basicLightbox instance.
 
@@ -100,9 +100,15 @@ const instance = basicLightbox.create(`
 })
 ```
 
+```js
+const instance = basicLightbox.create(
+	document.querySelector('#template')
+)
+```
+
 Parameters:
 
-- `html` `{String}` Content of the lightbox.
+- `content` `{Node|String}` Content of the lightbox.
 - `opts` `{?Object}` An object of [options](#options).
 
 Returns:
