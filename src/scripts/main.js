@@ -1,9 +1,45 @@
 /**
+ * Creates an element from a HTML string.
+ * @param {String} html
+ * @param {?Boolean} children - Return all children instead of the first one.
+ * @returns {Node}
+ */
+const toElement = function(html, children = false) {
+
+	const elem = document.createElement('div')
+
+	elem.innerHTML = html.trim()
+
+	return children === true ? elem.children : elem.firstChild
+
+}
+
+/**
+ * Validates and converts content.
+ * @param {Node|String|Array} content
+ * @returns {Array} content - Validated content.
+ */
+const validateContent = function(content) {
+
+	// Convert string to an array of Node elements
+	if (typeof content === 'string') content = Array.from(toElement(content, true))
+
+	// Convert Node to an array of Node elements
+	if (content instanceof HTMLElement === true) content = [ content ]
+
+	// Check if content is an array
+	if (Array.isArray(content) === false) throw new Error('Content must be a Node element or string')
+
+	return content
+
+}
+
+/**
  * Validates options and sets defaults for undefined properties.
  * @param {?Object} opts
  * @returns {Object} opts - Validated options.
  */
-const validate = function(opts = {}) {
+const validateOptions = function(opts = {}) {
 
 	opts = Object.assign({}, opts)
 
@@ -50,28 +86,22 @@ export const visible = function(elem) {
 
 /**
  * Creates a lightbox DOM element.
- * @param {?String} html - Lightbox content.
+ * @param {Array} content
  * @param {Object} opts
  * @returns {Node} elem
  */
-const render = function(html = '', opts) {
+const render = function(content, opts) {
 
-	const elem = document.createElement('div')
-
-	// Add the default class
-	elem.classList.add('basicLightbox')
-
-	// Add a custom class when available
-	if (opts.className !== '') elem.classList.add(...opts.className.split(' '))
-
-	// Add lightbox content
-	elem.innerHTML = `
-		<div class="basicLightbox__placeholder" role="dialog">
-			${ html }
+	const elem = toElement(`
+		<div class="basicLightbox ${ opts.className }">
+			<div class="basicLightbox__placeholder" role="dialog"></div>
 		</div>
-	`
+	`)
 
 	const placeholder = elem.querySelector('.basicLightbox__placeholder')
+
+	// Move content into lightbox placeholder
+	content.forEach((child) => placeholder.appendChild(child))
 
 	// Check if placeholder contains a tag that requires a special treatment
 	const img = containsTag(placeholder, 'IMG')
@@ -140,17 +170,17 @@ const close = function(elem, next) {
 
 /**
  * Creats a new instance.
- * @param {?String} html - Lightbox content.
+ * @param {Node|String|Array} content
  * @param {?Object} opts
  * @returns {Object} instance
  */
-export const create = function(html, opts) {
+export const create = function(content, opts) {
 
-	// Validate options
-	opts = validate(opts)
+	content = validateContent(content)
+	opts = validateOptions(opts)
 
 	// Render the lightbox element
-	const elem = render(html, opts)
+	const elem = render(content, opts)
 
 	// Returns the lightbox element
 	const _element = () => {

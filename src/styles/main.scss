@@ -56,11 +56,6 @@ $basicLightbox__timing: ease !default;
 			width: auto;
 			height: auto;
 		}
-
-		> [data-basicLightbox] {
-			// Always show content no matter what
-			display: block !important;
-		}
 	}
 
 	&--img &__placeholder,
@@ -74,12 +69,5 @@ $basicLightbox__timing: ease !default;
 	&--visible &__placeholder {
 		transform: scale(1);
 	}
-
-}
-
-[data-basicLightbox] {
-
-	// Always hide content no matter what
-	display: none !important;
 
 }
