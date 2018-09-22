@@ -24,7 +24,7 @@ The lightest lightbox ever made.
 
 ## Features
 
-- Works in all modern browsers
+- Works in all modern browsers and IE11 ([with polyfills](#requirements))
 - Zero dependencies
 - CommonJS and AMD support
 - Works with images, videos, iframes and any kind of HTML
@@ -34,9 +34,7 @@ The lightest lightbox ever made.
 
 basicLightbox depends on the following browser features and APIs:
 
-- [classList](https://dom.spec.whatwg.org/#dom-element-classlist)
-- [Pointer Events](https://www.w3.org/TR/pointerevents/)
-- [Flexible Box Layout Module](https://www.w3.org/TR/css3-flexbox/)
+- [Array.from](https://www.ecma-international.org/ecma-262/6.0/#sec-array.from)
 - [Object.assign](http://www.ecma-international.org/ecma-262/6.0/#sec-object.assign)
 - [requestAnimationFrame](https://www.w3.org/TR/animation-timing/#dom-windowanimationtiming-requestanimationframe)
 
