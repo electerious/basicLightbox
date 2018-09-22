@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### New
+
+- Allow Node elements in `.create()` (#15, #17)
+- `onShow` and `onClose` callbacks
+- Streamlined API with less options to make basicLightbox easier to use
+
+### Changed
+
+- Removed `beforeShow` and `afterShow` callbacks
+- Removed `beforeClose` and `afterClose` callbacks
+- Removed `beforePlaceholder` and `afterPlaceholder` options
+
 ## [4.0.3] - 2018-05-18
 
 ### Fixed
