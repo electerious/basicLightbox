@@ -24,9 +24,10 @@ The lightest lightbox ever made.
 ## Features
 
 - Works in all modern browsers and IE11 ([with polyfills](#requirements))
+- Supports images, videos, iframes and any kind of HTML
+- Creates a lightbox from a string or from a DOM element/node
 - Zero dependencies
 - CommonJS and AMD support
-- Works with images, videos, iframes and any kind of HTML
 - Simple JS API
 
 ## Requirements
