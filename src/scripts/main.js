@@ -21,14 +21,14 @@ const toElement = function(html, children = false) {
  */
 const validateContent = function(content) {
 
-	// Convert string to an array of Node elements
+	// Convert string to an array of elements
 	if (typeof content === 'string') content = Array.from(toElement(content, true))
 
-	// Convert Node to an array of Node elements
+	// Convert element to an array of elements
 	if (content instanceof HTMLElement === true) content = [ content ]
 
 	// Check if content is an array
-	if (Array.isArray(content) === false) throw new Error('Content must be a Node element or string')
+	if (Array.isArray(content) === false) throw new Error('Content must be a DOM element/node or string')
 
 	return content
 
@@ -58,7 +58,7 @@ const validateOptions = function(opts = {}) {
 }
 
 /**
- * Checks if a DOM element's first child has a specific tag.
+ * Checks if an element's first child has a specific tag.
  * @param {Node} elem
  * @param {String} tag
  * @returns {Boolean} containsTag
@@ -72,7 +72,7 @@ const containsTag = function(elem, tag) {
 }
 
 /**
- * Checks if a given or any lightbox element is visible.
+ * Checks if a given or any lightbox is visible.
  * @param {?Node} elem
  * @returns {Boolean} visible
  */
@@ -85,7 +85,7 @@ export const visible = function(elem) {
 }
 
 /**
- * Creates a lightbox DOM element.
+ * Creates a lightbox element.
  * @param {Array} content
  * @param {Object} opts
  * @returns {Node} elem
@@ -119,7 +119,7 @@ const render = function(content, opts) {
 }
 
 /**
- * Shows a lightbox by appending a DOM element to the DOM.
+ * Shows a lightbox by appending an element to the DOM.
  * @param {Node} elem
  * @param {Function} next - The callback that gets executed when the lightbox starts to show up.
  * @returns {Boolean} success
@@ -144,7 +144,7 @@ const show = function(elem, next) {
 }
 
 /**
- * Closes a lightbox by fading the element out and by removing the DOM element from the DOM.
+ * Closes a lightbox by fading the element out and by removing the element from the DOM.
  * @param {Node} elem
  * @param {Function} next - The callback that gets executed when the lightbox is fully closed.
  * @returns {Boolean} success

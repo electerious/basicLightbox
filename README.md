@@ -18,7 +18,8 @@ The lightest lightbox ever made.
 
 | Name | Description | Link |
 |:-----------|:------------|:------------|
-| Default | Includes all features. | [Try it on CodePen](https://codepen.io/electerious/pen/rLBvGz) |
+| Default | Includes all features. | [Try it on CodePen]() |
+| DOM elements/nodes | Use DOM elements/nodes in basicLightbox. | [Try it on CodePen]() |
 
 ## Features
 
@@ -185,7 +186,7 @@ Returns:
 
 ### .element()
 
-Returns the Node object associated with the instance.
+Returns the DOM element/node associated with the instance.
 
 Example:
 
@@ -195,7 +196,7 @@ const elem = instance.element()
 
 Returns:
 
-- `{Node}` Node object associated with the instance.
+- `{Node}` DOM element/node associated with the instance.
 
 ## Options
 
