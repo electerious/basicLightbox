@@ -21,6 +21,7 @@ The lightest lightbox ever made.
 | Default | Includes most features. | [Try it on CodePen]() |
 | DOM elements/nodes | Use DOM elements/nodes in basicLightbox. | [Try it on CodePen]() |
 | Create element | Use `.createElement()` with basicLightbox. | [Try it on CodePen]() |
+| Events | Multiple ways to handle events. | [Try it on CodePen]() |
 
 ## Features
 
