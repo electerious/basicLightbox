@@ -48,6 +48,12 @@
 		<img width="1400" height="900" src="https://placehold.it/1400x900">
 	</div>
 
+	<div id="persistant" hidden>
+		<h1>Persistant</h1>
+		<p>The value and state of this lightbox persists as long as you use the same instance.<br>Create a new instance when you don't want to keep the state.</p>
+		<input placeholder="My value is persistant…">
+	</div>
+
 	<template id="template">
 		<h1>HTML &lt;template&gt; Tag</h1>
 		<p>The template element holds HTML code without displaying it.<br>Doesn't work in older browsers.</p>
@@ -55,6 +61,7 @@
 
 	<button class="html">html</button>
 	<button class="image">image</button>
+	<button class="persistant">persistant</button>
 	<button class="template">template</button>
 
 	<script src="../dist/basicLightbox.min.js"></script>
@@ -63,10 +70,12 @@
 
 		const htmlInstance = basicLightbox.create(document.querySelector('#html'))
 		const imageInstance = basicLightbox.create(document.querySelector('#image'))
+		const persistantInstance = basicLightbox.create(document.querySelector('#persistant'))
 		const templateInstance = basicLightbox.create(document.querySelector('#template'))
 
 		document.querySelector('button.html').onclick = htmlInstance.show
 		document.querySelector('button.image').onclick = imageInstance.show
+		document.querySelector('button.persistant').onclick = persistantInstance.show
 		document.querySelector('button.template').onclick = templateInstance.show
 
 	</script>
