@@ -18,10 +18,10 @@ The lightest lightbox ever made.
 
 | Name | Description | Link |
 |:-----------|:------------|:------------|
-| Default | Includes most features. | [Try it on CodePen]() |
-| DOM elements/nodes | Use DOM elements/nodes in basicLightbox. | [Try it on CodePen]() |
-| Create element | Use `.createElement()` with basicLightbox. | [Try it on CodePen]() |
-| Events | Multiple ways to handle events. | [Try it on CodePen]() |
+| Default | Includes most features. | [Try it on CodePen](https://codepen.io/electerious/pen/rLBvGz) |
+| DOM elements/nodes | Use DOM elements/nodes in basicLightbox. | [Try it on CodePen](https://codepen.io/electerious/pen/pOBLxQ) |
+| Create element | Use `.createElement()` with basicLightbox. | [Try it on CodePen](https://codepen.io/electerious/pen/wEZmQy) |
+| Events | Multiple ways to handle events. | [Try it on CodePen](https://codepen.io/electerious/pen/pOBLQQ) |
 
 ## Features
 
