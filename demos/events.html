@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+	<meta charset="utf-8">
+	<title>basicLightbox Demo</title>
+
+	<link rel="stylesheet" href="../dist/basicLightbox.min.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+
+		html {
+			font-family: sans-serif;
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			text-align: center;
+			min-height: 100%;
+			font-size: 14px;
+			color: white;
+		}
+
+		button {
+			display: inline-block;
+			appearance: none;
+			background: #2875ed;
+			margin: 50px 0;
+			padding: 6px 10px;
+			border: none;
+			color: white;
+			font: inherit;
+			border-radius: 3px;
+			cursor: pointer;
+			outline: none;
+		}
+
+	</style>
+
+	<div id="existing" hidden>
+		<h1>Existing event</h1>
+		<p>The event of this button has been attached to the DOM element/node and basicLightbox keeps it.</p>
+		<button>Show alert</button>
+	</div>
+
+	<div id="new" hidden>
+		<h1>New events</h1>
+		<p>The event of this button has been added via JS in the `.onShow` callback of basicLightbox.</p>
+		<button>Show alert</button>
+	</div>
+
+	<button class="existing">existing</button>
+	<button class="new">new</button>
+	<button class="string">string</button>
+
+	<script src="../dist/basicLightbox.min.js"></script>
+
+	<script>
+
+		// Existing
+
+		document.querySelector('#existing button').addEventListener('click', () => {
+			alert('This is an event that has been added to the DOM element/node before creating the lightbox.')
+		})
+
+		const existingInstance = basicLightbox.create(document.querySelector('#existing'))
+
+		document.querySelector('button.existing').onclick = existingInstance.show
+
+		// New
+
+		const newInstance = basicLightbox.create(document.querySelector('#new'), {
+			onShow: (instance) => {
+				// Make sure to overwrite existing events. Using addEventListener would lead to multiple events as
+				// onShow executes every time the lightbox opens. Create a new instance when you don't want to keep the state and events.
+				instance.element().querySelector('button').onclick = () => alert('This is an event that has been added in the `.onShow` callback of basicLightbox.')
+			}
+		})
+
+		document.querySelector('button.new').onclick = newInstance.show
+
+		// String
+
+		document.querySelector('button.string').onclick = () =>	{
+
+			const html = `
+				<h1>String</h1>
+				<p>You can add events with the \`.onShow\` callback even when passing a string to basicLightbox.</p>
+				<button>Show alert</button>
+			`
+
+			basicLightbox.create(html, {
+				onShow: (instance) => {
+					instance.element().querySelector('button').onclick = () => alert('This is an event that has been added in the `.onShow` callback of basicLightbox.')
+				}
+			}).show()
+
+		}
+
+	</script>
+
+</html>

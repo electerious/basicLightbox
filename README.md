@@ -18,25 +18,25 @@ The lightest lightbox ever made.
 
 | Name | Description | Link |
 |:-----------|:------------|:------------|
-| Default | Includes all features. | [Try it on CodePen](https://codepen.io/electerious/pen/rLBvGz) |
-| Thumbnails | Shows a big version of a photo after clicking its thumbnail. | [Try it on CodePen](https://codepen.io/electerious/pen/bgqxVJ) |
-| Gallery | Lightbox with navigation. | [Try it on CodePen](https://codepen.io/electerious/pen/WRpgxV) |
+| Default | Includes most features. | [Try it on CodePen]() |
+| DOM elements/nodes | Use DOM elements/nodes in basicLightbox. | [Try it on CodePen]() |
+| Create element | Use `.createElement()` with basicLightbox. | [Try it on CodePen]() |
+| Events | Multiple ways to handle events. | [Try it on CodePen]() |
 
 ## Features
 
-- Works in all modern browsers
+- Works in all modern browsers and IE11 ([with polyfills](#requirements))
+- Supports images, videos, iframes and any kind of HTML
+- Creates a lightbox from a string or from a DOM element/node
 - Zero dependencies
 - CommonJS and AMD support
-- Works with images, videos, iframes and any kind of HTML
 - Simple JS API
 
 ## Requirements
 
 basicLightbox depends on the following browser features and APIs:
 
-- [classList](https://dom.spec.whatwg.org/#dom-element-classlist)
-- [Pointer Events](https://www.w3.org/TR/pointerevents/)
-- [Flexible Box Layout Module](https://www.w3.org/TR/css3-flexbox/)
+- [Array.from](https://www.ecma-international.org/ecma-262/6.0/#sec-array.from)
 - [Object.assign](http://www.ecma-international.org/ecma-262/6.0/#sec-object.assign)
 - [requestAnimationFrame](https://www.w3.org/TR/animation-timing/#dom-windowanimationtiming-requestanimationframe)
 
@@ -44,14 +44,14 @@ Some of these APIs are capable of being polyfilled in older browsers. Check the 
 
 ## Setup
 
-We recommend to install basicLightbox using [Bower](https://bower.io/) or [npm](https://npmjs.com).
-
-```sh
-bower install basicLightbox
-```
+We recommend to install basicLightbox using [npm](https://npmjs.com) or [yarn](https://yarnpkg.com).
 
 ```sh
 npm install basiclightbox
+```
+
+```sh
+yarn add basiclightbox
 ```
 
 Include the CSS file in the `head` tag and the JS file at the end of your `body` tag…
@@ -70,9 +70,13 @@ Include the CSS file in the `head` tag and the JS file at the end of your `body`
 const basicLightbox = require('basiclightbox')
 ```
 
+```js
+import * as basicLightbox from 'basiclightbox'
+```
+
 ## API
 
-### .create(html, opts)
+### .create(content, opts)
 
 Creates a new basicLightbox instance.
 
@@ -100,9 +104,15 @@ const instance = basicLightbox.create(`
 })
 ```
 
+```js
+const instance = basicLightbox.create(
+	document.querySelector('#template')
+)
+```
+
 Parameters:
 
-- `html` `{String}` Content of the lightbox.
+- `content` `{Node|String}` Content of the lightbox.
 - `opts` `{?Object}` An object of [options](#options).
 
 Returns:
@@ -179,7 +189,7 @@ Returns:
 
 ### .element()
 
-Returns the Node object associated with the instance.
+Returns the DOM element/node associated with the instance.
 
 Example:
 
@@ -189,7 +199,7 @@ const elem = instance.element()
 
 Returns:
 
-- `{Node}` Node object associated with the instance.
+- `{Node}` DOM element/node associated with the instance.
 
 ## Options
 
@@ -203,23 +213,18 @@ The option object can include the following properties:
 	closable: true,
 	/*
 	 * One or more space separated classes to be added to the basicLightbox element.
-	 * Must be a string or a function which returns a string.
 	 */
-	className: null,
+	className: '',
 	/*
-	 * Callback functions.
-	 * Returning false will stop the caller function and prevent the lightbox from showing or closing.
+	 * Function that gets executed before the lightbox will be shown.
+	 * Returning false will prevent the lightbox from showing.
 	 */
-	beforeShow: (instance) => {},
-	afterShow: (instance) => {},
-	beforeClose: (instance) => {},
-	afterClose: (instance) => {},
+	onShow: (instance) => {},
 	/*
-	 * String containing HTML or function which returns a string of HTML.
-	 * Will be added before or after the content placeholder of the lightbox.
+	 * Function that gets executed before the lightbox closes.
+	 * Returning false will prevent the lightbox from closing.
 	 */
-	beforePlaceholder: '',
-	afterPlaceholder: ''
+	onClose: (instance) => {}
 }
 ```
 

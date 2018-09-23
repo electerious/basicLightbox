@@ -1,11 +1,51 @@
 /**
- * Stops event propagation and prevents the default event action.
- * @param {Object} e - DOM event.
+ * Creates an element from a HTML string.
+ * @param {String} html
+ * @param {?Boolean} children - Return all children instead of the first one.
+ * @returns {Node}
  */
-const stopEvent = function(e) {
+const toElement = function(html, children = false) {
 
-	if (typeof e.stopPropagation === 'function') e.stopPropagation()
-	if (typeof e.preventDefault === 'function') e.preventDefault()
+	const elem = document.createElement('div')
+
+	elem.innerHTML = html.trim()
+
+	return children === true ? elem.children : elem.firstChild
+
+}
+
+/**
+ * Validates and converts content.
+ * @param {Node|String} content
+ * @returns {Array} content - Validated content.
+ */
+const validateContent = function(content) {
+
+	const isString = typeof content === 'string'
+	const isHTMLElement = content instanceof HTMLElement === true
+
+	if (isString === false && isHTMLElement === false) {
+
+		throw new Error('Content must be a DOM element/node or string')
+
+	}
+
+	if (isString === true) {
+
+		// String
+		return Array.from(toElement(content, true))
+
+	} else if (content.tagName === 'TEMPLATE') {
+
+		// Template
+		return [ content.content.cloneNode(true) ]
+
+	} else {
+
+		// HTMLElement
+		return Array.from(content.children)
+
+	}
 
 }
 
@@ -14,32 +54,26 @@ const stopEvent = function(e) {
  * @param {?Object} opts
  * @returns {Object} opts - Validated options.
  */
-const validate = function(opts = {}) {
+const validateOptions = function(opts = {}) {
 
 	opts = Object.assign({}, opts)
 
-	if (opts.closable !== false) opts.closable = true
+	if (opts.closable == null) opts.closable = true
+	if (opts.className == null) opts.className = ''
+	if (opts.onShow == null) opts.onShow = () => {}
+	if (opts.onClose == null) opts.onClose = () => {}
 
-	if (typeof opts.className === 'function') opts.className = opts.className()
-	if (typeof opts.className !== 'string') opts.className = null
-
-	if (typeof opts.beforeShow !== 'function') opts.beforeShow = () => {}
-	if (typeof opts.afterShow !== 'function') opts.afterShow = () => {}
-	if (typeof opts.beforeClose !== 'function') opts.beforeClose = () => {}
-	if (typeof opts.afterClose !== 'function') opts.afterClose = () => {}
-
-	if (typeof opts.beforePlaceholder === 'function') opts.beforePlaceholder = opts.beforePlaceholder()
-	if (typeof opts.beforePlaceholder !== 'string') opts.beforePlaceholder = ''
-
-	if (typeof opts.afterPlaceholder === 'function') opts.afterPlaceholder = opts.afterPlaceholder()
-	if (typeof opts.afterPlaceholder !== 'string') opts.afterPlaceholder = ''
+	if (typeof opts.closable !== 'boolean') throw new Error('Property `closable` must be a boolean')
+	if (typeof opts.className !== 'string') throw new Error('Property `className` must be a string')
+	if (typeof opts.onShow !== 'function') throw new Error('Property `onShow` must be a function')
+	if (typeof opts.onClose !== 'function') throw new Error('Property `onClose` must be a function')
 
 	return opts
 
 }
 
 /**
- * Checks if a DOM element's first child has a specific tag.
+ * Checks if an element's first child has a specific tag.
  * @param {Node} elem
  * @param {String} tag
  * @returns {Boolean} containsTag
@@ -53,7 +87,7 @@ const containsTag = function(elem, tag) {
 }
 
 /**
- * Checks if a given or any lightbox element is visible.
+ * Checks if a given or any lightbox is visible.
  * @param {?Node} elem
  * @returns {Boolean} visible
  */
@@ -66,31 +100,23 @@ export const visible = function(elem) {
 }
 
 /**
- * Creates a lightbox DOM element.
- * @param {?String} html - Lightbox content.
+ * Creates a lightbox element.
+ * @param {Array} content
  * @param {Object} opts
  * @returns {Node} elem
  */
-const render = function(html = '', opts) {
+const render = function(content, opts) {
 
-	const elem = document.createElement('div')
-
-	// Add the default class
-	elem.classList.add('basicLightbox')
-
-	// Add a custom class when available
-	if (opts.className != null) elem.classList.add(...opts.className.split(' '))
-
-	// Add lightbox content
-	elem.innerHTML = `
-		${ opts.beforePlaceholder }
-		<div class="basicLightbox__placeholder" role="dialog">
-			${ html }
+	const elem = toElement(`
+		<div class="basicLightbox ${ opts.className }">
+			<div class="basicLightbox__placeholder" role="dialog"></div>
 		</div>
-		${ opts.afterPlaceholder }
-	`
+	`)
 
 	const placeholder = elem.querySelector('.basicLightbox__placeholder')
+
+	// Move content into lightbox placeholder
+	content.forEach((child) => placeholder.appendChild(child))
 
 	// Check if placeholder contains a tag that requires a special treatment
 	const img = containsTag(placeholder, 'IMG')
@@ -108,7 +134,7 @@ const render = function(html = '', opts) {
 }
 
 /**
- * Shows a lightbox by appending a DOM element to the DOM.
+ * Shows a lightbox by appending an element to the DOM.
  * @param {Node} elem
  * @param {Function} next - The callback that gets executed when the lightbox starts to show up.
  * @returns {Boolean} success
@@ -133,7 +159,7 @@ const show = function(elem, next) {
 }
 
 /**
- * Closes a lightbox by fading the element out and by removing the DOM element from the DOM.
+ * Closes a lightbox by fading the element out and by removing the element from the DOM.
  * @param {Node} elem
  * @param {Function} next - The callback that gets executed when the lightbox is fully closed.
  * @returns {Boolean} success
@@ -159,17 +185,17 @@ const close = function(elem, next) {
 
 /**
  * Creats a new instance.
- * @param {?String} html - Lightbox content.
+ * @param {Node|String} content
  * @param {?Object} opts
  * @returns {Object} instance
  */
-export const create = function(html, opts) {
+export const create = function(content, opts) {
 
-	// Validate options
-	opts = validate(opts)
+	content = validateContent(content)
+	opts = validateOptions(opts)
 
 	// Render the lightbox element
-	const elem = render(html, opts)
+	const elem = render(content, opts)
 
 	// Returns the lightbox element
 	const _element = () => {
@@ -188,14 +214,11 @@ export const create = function(html, opts) {
 	// Show the lightbox
 	const _show = (next) => {
 
-		// Run beforeShow event and stop execution when function returns false
-		if (opts.beforeShow(instance) === false) return false
+		// Run onShow callback and stop execution when function returns false
+		if (opts.onShow(instance) === false) return false
 
 		// Show the lightbox
 		return show(elem, () => {
-
-			// Run afterShow event
-			opts.afterShow(instance)
 
 			// Continue with the callback when available
 			if (typeof next === 'function') return next(instance)
@@ -207,13 +230,10 @@ export const create = function(html, opts) {
 	// Hide the lightbox
 	const _close = (next) => {
 
-		// Run beforeClose event and stop execution when function returns false
-		if (opts.beforeClose(instance) === false) return false
+		// Run onClose callback and stop execution when function returns false
+		if (opts.onClose(instance) === false) return false
 
 		return close(elem, () => {
-
-			// Run afterClose event
-			opts.afterClose(instance)
 
 			// Continue with the callback when available
 			if (typeof next === 'function') return next(instance)
@@ -223,19 +243,16 @@ export const create = function(html, opts) {
 	}
 
 	// Close lightbox when clicking the background
-	if (opts.closable === true) elem.onclick = function(e) {
+	if (opts.closable === true) elem.addEventListener('click', (e) => {
 
-		// If e.target is not the same element as this,
+		// If e.target is not the same element as elem,
 		// then the user clicked a descendant of the element.
-		if (e.target !== this) return
+		if (e.target !== elem) return
 
 		// Close lightbox with the instance function
 		_close()
 
-		// Prevent default event and propagation
-		stopEvent(e)
-
-	}
+	})
 
 	// Assign instance to a variable so the instance can be used
 	// elsewhere in the current function.
