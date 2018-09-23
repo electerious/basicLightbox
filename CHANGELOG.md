@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Node elements and templates in `.create()` (#15, #17)
 - `onShow` and `onClose` callbacks
 - Streamlined API with less options to make basicLightbox easier to use
+- More demos
 
 ### Changed
 
