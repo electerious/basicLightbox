@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [5.0.1] - 2018-09-23
 
-### New
+### Added
 
 - Link to CodePen demos
 
 ## [5.0.0] - 2018-09-23
 
-### New
+### Added
 
 - Node elements and templates in `.create()` (#15, #17)
 - `onShow` and `onClose` callbacks
@@ -50,7 +50,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [4.0.0] - 2017-12-22
 
-### New
+### Added
 
 - Support for `video` tag
 - Documentation of SASS variables
@@ -68,7 +68,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [3.0.3] - 2017-08-08
 
-### New
+### Added
 
 - Added a changelog
 
