@@ -44,7 +44,7 @@ Some of these APIs are capable of being polyfilled in older browsers. Check the 
 
 ## Setup
 
-We recommend to install basicLightbox using [npm](https://npmjs.com) or [yarn](https://yarnpkg.com).
+We recommend installing basicLightbox using [npm](https://npmjs.com) or [yarn](https://yarnpkg.com).
 
 ```sh
 npm install basiclightbox
