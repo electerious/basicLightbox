@@ -4,10 +4,13 @@ const { writeFile, readFile } = require('fs')
 const { promisify } = require('util')
 const js = require('rosid-handler-js')
 const sass = require('rosid-handler-sass')
-const types = (typeDefs) => {	
-	return readFile(typeDefs)
-}
 const save = promisify(writeFile)
+const read = promisify(readFile)
+
+// Just reads in the file right now to match pattern fo other build tools 
+const types = (typeDefs) => {	
+	return read(typeDefs)
+}
 
 sass('src/styles/main.scss', {
 
