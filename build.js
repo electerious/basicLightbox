@@ -1,9 +1,12 @@
 'use strict'
 
-const { writeFile } = require('fs')
+const { writeFile, readFile } = require('fs')
 const { promisify } = require('util')
 const js = require('rosid-handler-js')
 const sass = require('rosid-handler-sass')
+const types = (typeDefs) => {	
+	return readFile(typeDefs)
+}
 const save = promisify(writeFile)
 
 sass('src/styles/main.scss', {
@@ -27,4 +30,10 @@ js('src/scripts/main.js', {
 
 	return save('dist/basicLightbox.min.js', data)
 
+})
+
+types('src/types/basicLightbox.d.ts').then((data) => {
+
+	return save('dist/basicLightbox.min.d.ts', data)
+	
 })
