@@ -4,7 +4,7 @@
  * @param {?Boolean} children - Return all children instead of the first one.
  * @returns {Node}
  */
-const toElement = function(html, children = false) {
+const toElement = function (html, children = false) {
 
 	const elem = document.createElement('div')
 
@@ -19,7 +19,7 @@ const toElement = function(html, children = false) {
  * @param {Node|String} content
  * @returns {Array} content - Validated content.
  */
-const validateContent = function(content) {
+const validateContent = function (content) {
 
 	const isString = typeof content === 'string'
 	const isHTMLElement = content instanceof HTMLElement === true
@@ -38,7 +38,7 @@ const validateContent = function(content) {
 	} else if (content.tagName === 'TEMPLATE') {
 
 		// Template
-		return [ content.content.cloneNode(true) ]
+		return [content.content.cloneNode(true)]
 
 	} else {
 
@@ -54,14 +54,16 @@ const validateContent = function(content) {
  * @param {?Object} opts
  * @returns {Object} opts - Validated options.
  */
-const validateOptions = function(opts = {}) {
+const validateOptions = function (opts = {}) {
 
 	opts = Object.assign({}, opts)
 
 	if (opts.closable == null) opts.closable = true
 	if (opts.className == null) opts.className = ''
-	if (opts.onShow == null) opts.onShow = () => {}
-	if (opts.onClose == null) opts.onClose = () => {}
+	if (opts.onShow == null) opts.onShow = () => {
+	}
+	if (opts.onClose == null) opts.onClose = () => {
+	}
 
 	if (typeof opts.closable !== 'boolean') throw new Error('Property `closable` must be a boolean')
 	if (typeof opts.className !== 'string') throw new Error('Property `className` must be a string')
@@ -78,7 +80,7 @@ const validateOptions = function(opts = {}) {
  * @param {String} tag
  * @returns {Boolean} containsTag
  */
-const containsTag = function(elem, tag) {
+const containsTag = function (elem, tag) {
 
 	const children = elem.children
 
@@ -91,7 +93,7 @@ const containsTag = function(elem, tag) {
  * @param {?Node} elem
  * @returns {Boolean} visible
  */
-export const visible = function(elem) {
+export const visible = function (elem) {
 
 	elem = elem || document.querySelector('.basicLightbox')
 
@@ -105,10 +107,10 @@ export const visible = function(elem) {
  * @param {Object} opts
  * @returns {Node} elem
  */
-const render = function(content, opts) {
+const render = function (content, opts) {
 
 	const elem = toElement(`
-		<div class="basicLightbox ${ opts.className }">
+		<div class="basicLightbox ${opts.className}">
 			<div class="basicLightbox__placeholder" role="dialog"></div>
 		</div>
 	`)
@@ -122,12 +124,14 @@ const render = function(content, opts) {
 	const img = containsTag(placeholder, 'IMG')
 	const video = containsTag(placeholder, 'VIDEO')
 	const iframe = containsTag(placeholder, 'IFRAME')
+	const picture = containsTag(placeholder, 'PICTURE')
 
 	// Add special treatment class when it only contains an image, a video or iframe.
 	// This class is necessary to center the image, video or iframe.
 	if (img === true) elem.classList.add('basicLightbox--img')
 	if (video === true) elem.classList.add('basicLightbox--video')
 	if (iframe === true) elem.classList.add('basicLightbox--iframe')
+	if (picture === true) elem.classList.add('basicLightbox--picture')
 
 	return elem
 
@@ -139,7 +143,7 @@ const render = function(content, opts) {
  * @param {Function} next - The callback that gets executed when the lightbox starts to show up.
  * @returns {Boolean} success
  */
-const show = function(elem, next) {
+const show = function (elem, next) {
 
 	document.body.appendChild(elem)
 
@@ -164,7 +168,7 @@ const show = function(elem, next) {
  * @param {Function} next - The callback that gets executed when the lightbox is fully closed.
  * @returns {Boolean} success
  */
-const close = function(elem, next) {
+const close = function (elem, next) {
 
 	elem.classList.remove('basicLightbox--visible')
 
@@ -189,7 +193,7 @@ const close = function(elem, next) {
  * @param {?Object} opts
  * @returns {Object} instance
  */
-export const create = function(content, opts) {
+export const create = function (content, opts) {
 
 	content = validateContent(content)
 	opts = validateOptions(opts)
